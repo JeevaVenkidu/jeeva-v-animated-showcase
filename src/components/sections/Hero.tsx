@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
@@ -59,20 +60,21 @@ const Hero = ({ use3D = true }) => {
             </span>
           </motion.h1>
 
+          {/* Fixed animation for the transition text */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-8"
           >
             <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 mb-4">
               Backend Developer transitioning to
             </h2>
             <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: '100%' }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="relative inline-block"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="inline-block"
             >
               <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Full-Stack Excellence
@@ -83,7 +85,7 @@ const Hero = ({ use3D = true }) => {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg sm:text-xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 p-4 rounded-xl border border-white/20 shadow-lg"
           >
             Crafting robust APIs and scalable backend solutions at{' '}
@@ -94,7 +96,7 @@ const Hero = ({ use3D = true }) => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <AnimatedButton 
