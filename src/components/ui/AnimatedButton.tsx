@@ -8,6 +8,8 @@ interface AnimatedButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({
@@ -16,6 +18,8 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   variant = 'primary',
   size = 'md',
   className = '',
+  type = 'button',
+  disabled = false,
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 transform-gpu';
   
@@ -33,15 +37,17 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   return (
     <motion.button
+      type={type}
+      disabled={disabled}
       whileHover={{ 
-        scale: 1.05,
-        y: -2,
+        scale: disabled ? 1 : 1.05,
+        y: disabled ? 0 : -2,
       }}
       whileTap={{ 
-        scale: 0.95,
-        y: 0,
+        scale: disabled ? 1 : 0.95,
+        y: disabled ? 0 : 0,
       }}
-      className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${disabled ? 'opacity-70 cursor-not-allowed' : ''} ${className}`}
       onClick={onClick}
     >
       <motion.span

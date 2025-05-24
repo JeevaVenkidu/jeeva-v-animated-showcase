@@ -1,12 +1,13 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import FloatingIcons from '../3d/FloatingIcons';
+import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
 import ParticleBackground from '../effects/ParticleBackground';
+import SimpleParticleBackground from '../effects/SimpleParticleBackground';
 import AnimatedButton from '../ui/AnimatedButton';
 
-const Hero = () => {
+const Hero = ({ use3D = true }) => {
   const downloadResume = () => {
     // This would trigger a resume download
     console.log('Downloading resume...');
@@ -18,8 +19,17 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <ParticleBackground />
-      <FloatingIcons />
+      {use3D ? (
+        <>
+          <ParticleBackground />
+          <FloatingIcons />
+        </>
+      ) : (
+        <>
+          <SimpleParticleBackground />
+          <SimpleFloatingIcons />
+        </>
+      )}
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <motion.div
