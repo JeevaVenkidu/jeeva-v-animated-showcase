@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/sections/Hero';
 
 const Home = () => {
-  const [use3D, setUse3D] = useState(false);
+  const [use3D, setUse3D] = useState(true);
   
   // Check if Three.js related modules are available
   useEffect(() => {

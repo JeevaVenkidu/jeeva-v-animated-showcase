@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
@@ -18,7 +19,17 @@ const Hero = ({ use3D = true }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80">
+      {/* Animated background gradients */}
+      <div className="absolute inset-0 -z-30">
+        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '8s' }}></div>
+        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '12s' }}></div>
+        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '10s' }}></div>
+      </div>
+      
       {use3D ? (
         <>
           <ParticleBackground />
@@ -74,7 +85,7 @@ const Hero = ({ use3D = true }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg sm:text-xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 p-4 rounded-xl border border-white/20 shadow-lg"
           >
             Crafting robust APIs and scalable backend solutions at{' '}
             <span className="font-semibold text-blue-600">Viskamnix Technology</span>, 
@@ -87,11 +98,19 @@ const Hero = ({ use3D = true }) => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <AnimatedButton onClick={downloadResume} size="lg">
+            <AnimatedButton 
+              onClick={downloadResume} 
+              size="lg"
+              className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 shadow-lg"
+            >
               Download Resume
             </AnimatedButton>
             
-            <AnimatedButton variant="outline" size="lg">
+            <AnimatedButton 
+              variant="outline" 
+              size="lg"
+              className="backdrop-blur-sm bg-white/10 border-white/40 hover:bg-white/20 shadow-lg"
+            >
               View Projects
             </AnimatedButton>
           </motion.div>
@@ -114,7 +133,7 @@ const Hero = ({ use3D = true }) => {
         </motion.div>
       </div>
 
-      {/* Gradient overlay */}
+      {/* Glass effect overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 pointer-events-none" />
     </section>
   );
