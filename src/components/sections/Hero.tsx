@@ -19,14 +19,14 @@ const Hero = ({ use3D = true }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 pt-16"> {/* Added pt-16 top padding */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16"> {/* Added pt-16 top padding */}
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '8s' }}></div>
-        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent dark:from-purple-600/10 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '12s' }}></div>
-        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent rounded-full blur-3xl animate-pulse" 
+        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent dark:from-cyan-600/10 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '10s' }}></div>
       </div>
       
@@ -54,7 +54,7 @@ const Hero = ({ use3D = true }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <span className="block text-gray-900 mb-2">Hello, I'm</span>
+            <span className="block text-gray-900 dark:text-gray-100 mb-2">Hello, I'm</span>
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
               Jeeva V
             </span>
@@ -67,7 +67,7 @@ const Hero = ({ use3D = true }) => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-8"
           >
-            <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 mb-4">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-4">
               Backend Developer transitioning to
             </h2>
             <motion.div
@@ -86,10 +86,10 @@ const Hero = ({ use3D = true }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg sm:text-xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 p-4 rounded-xl border border-white/20 shadow-lg"
+            className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
           >
             Crafting robust APIs and scalable backend solutions at{' '}
-            <span className="font-semibold text-blue-600">Viskamnix Technology</span>, 
+            <span className="font-semibold text-blue-600 dark:text-blue-400">Viskamnix Technology</span>, 
             while mastering modern frontend technologies to become a complete full-stack developer.
           </motion.p>
 
@@ -102,7 +102,7 @@ const Hero = ({ use3D = true }) => {
             <AnimatedButton 
               onClick={downloadResume} 
               size="lg"
-              className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 shadow-lg"
+              className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 dark:from-blue-700/90 dark:to-purple-700/90 dark:hover:from-blue-600/90 dark:hover:to-purple-600/90 shadow-lg"
             >
               Download Resume
             </AnimatedButton>
@@ -110,7 +110,7 @@ const Hero = ({ use3D = true }) => {
             <AnimatedButton 
               variant="outline" 
               size="lg"
-              className="backdrop-blur-sm bg-white/10 border-white/40 hover:bg-white/20 shadow-lg"
+              className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border-white/40 dark:border-gray-600/40 hover:bg-white/20 dark:hover:bg-gray-700/20 shadow-lg"
             >
               View Projects
             </AnimatedButton>
@@ -124,7 +124,7 @@ const Hero = ({ use3D = true }) => {
           >
             <motion.button
               onClick={scrollToNext}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -135,7 +135,7 @@ const Hero = ({ use3D = true }) => {
       </div>
 
       {/* Glass effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
     </section>
   );
 };
