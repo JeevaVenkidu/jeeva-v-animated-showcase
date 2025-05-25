@@ -1,7 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Award, Code } from 'lucide-react';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Coding = () => {
   const profiles = [
@@ -37,9 +38,13 @@ const Coding = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Particle effects for both light and dark modes */}
+      <ParticleBackground />
+      <SimpleParticleBackground />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

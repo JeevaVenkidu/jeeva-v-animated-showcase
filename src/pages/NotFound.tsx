@@ -1,6 +1,9 @@
 
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { motion } from 'framer-motion';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import ParticleBackground from '../components/effects/ParticleBackground';
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,14 +16,45 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">404</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden">
+      {/* Particle effects for both light and dark modes */}
+      <ParticleBackground />
+      <SimpleParticleBackground />
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center relative z-10"
+      >
+        <motion.h1 
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-6xl font-bold mb-4 text-gray-900 dark:text-gray-100"
+        >
+          404
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-xl text-gray-600 dark:text-gray-300 mb-8"
+        >
+          Oops! Page not found
+        </motion.p>
+        <motion.a 
+          href="/" 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
           Return to Home
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
     </div>
   );
 };
