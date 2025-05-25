@@ -13,7 +13,7 @@ const ParticleBackground = () => {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      className="absolute inset-0 -z-20"
+      className="absolute inset-0 -z-10 pointer-events-none"
       options={{
         background: {
           color: {
@@ -46,7 +46,9 @@ const ParticleBackground = () => {
               distance: 140,
               links: {
                 opacity: 0.5,
-                color: "#ffffff"
+                color: {
+                  value: ['#3b82f6', '#8b5cf6', '#06b6d4']
+                }
               }
             },
             repulse: {
@@ -57,17 +59,19 @@ const ParticleBackground = () => {
         },
         particles: {
           color: {
-            value: ['#3b82f6', '#8b5cf6', '#06b6d4'],
+            value: ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'],
           },
           links: {
-            color: '#3b82f6',
+            color: {
+              value: ['#3b82f6', '#8b5cf6', '#06b6d4']
+            },
             distance: 150,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.4,
             width: 1,
             triangles: {
               enable: true,
-              opacity: 0.05
+              opacity: 0.1
             }
           },
           move: {
@@ -77,7 +81,7 @@ const ParticleBackground = () => {
               default: 'bounce',
             },
             random: true,
-            speed: 1.2,
+            speed: 1.5,
             straight: false,
             attract: {
               enable: false,
@@ -90,39 +94,45 @@ const ParticleBackground = () => {
               enable: true,
               area: 800,
             },
-            value: 80,
+            value: 100,
           },
           opacity: {
             value: {
-              min: 0.1,
-              max: 0.3
+              min: 0.3,
+              max: 0.8
             },
             animation: {
               enable: true,
-              speed: 1,
-              minimumValue: 0.1
+              speed: 1.5,
+              minimumValue: 0.2
             }
           },
           shape: {
             type: ['circle', 'triangle', 'polygon'],
           },
           size: {
-            value: { min: 1, max: 4 },
+            value: { min: 1, max: 5 },
             animation: {
               enable: true,
-              speed: 2,
+              speed: 3,
               minimumValue: 0.5
             }
           },
           twinkle: {
             particles: {
               enable: true,
-              frequency: 0.05,
+              frequency: 0.08,
               opacity: 1
             }
           }
         },
         detectRetina: true,
+        style: {
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: -10,
+        }
       }}
     />
   );
