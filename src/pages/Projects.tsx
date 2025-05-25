@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/cards/ProjectCard';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -49,46 +50,83 @@ const Projects = () => {
     ? projects 
     : projects.filter(project => project.category === filter);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SimpleParticleBackground />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+          >
             My <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          >
             A showcase of my backend expertise and growing full-stack capabilities
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Filter Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <motion.button
               key={category.id}
-              whileHover={{ scale: 1.05 }}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(category.id)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
                 filter === category.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md border border-gray-200 dark:border-gray-700'
+                  ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg'
               }`}
             >
               {category.name}
@@ -99,16 +137,18 @@ const Projects = () => {
         {/* Projects Grid */}
         <motion.div
           layout
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="grid md:grid-cols-2 gap-8"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.title}
               layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <ProjectCard {...project} />
             </motion.div>
@@ -117,8 +157,9 @@ const Projects = () => {
 
         {filteredProjects.length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="text-center py-16"
           >
             <p className="text-gray-600 dark:text-gray-300 text-lg">No projects found in this category.</p>

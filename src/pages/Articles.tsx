@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag } from 'lucide-react';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
 
 const Articles = () => {
   const [filter, setFilter] = useState('all');
@@ -56,46 +57,83 @@ const Articles = () => {
     ? articles 
     : articles.filter(article => article.category === filter);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SimpleParticleBackground />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+          >
             Articles & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Blogs</span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          >
             Sharing knowledge and insights from my development journey
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Filter Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <motion.button
               key={category.id}
-              whileHover={{ scale: 1.05 }}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(category.id)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
                 filter === category.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
+                  ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md hover:shadow-lg'
               }`}
             >
               {category.name}
@@ -106,62 +144,84 @@ const Articles = () => {
         {/* Articles Grid */}
         <motion.div
           layout
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="grid md:grid-cols-2 gap-8"
         >
           {filteredArticles.map((article, index) => (
             <motion.article
               key={article.title}
               layout
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 group"
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 group"
             >
               <div className="h-48 overflow-hidden">
-                <img
+                <motion.img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-full object-cover"
                 />
               </div>
 
               <div className="p-6">
                 <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
-                  <div className="flex items-center gap-1">
+                  <motion.div 
+                    className="flex items-center gap-1"
+                    whileHover={{ scale: 1.05 }}
+                  >
                     <Calendar size={16} />
                     <span>{new Date(article.date).toLocaleDateString()}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
+                  </motion.div>
+                  <motion.div 
+                    className="flex items-center gap-1"
+                    whileHover={{ scale: 1.05 }}
+                  >
                     <Clock size={16} />
                     <span>{article.readTime}</span>
-                  </div>
+                  </motion.div>
                 </div>
 
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <motion.h2 
+                  className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {article.title}
-                </h2>
+                </motion.h2>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                <motion.p 
+                  className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed"
+                  initial={{ opacity: 0.8 }}
+                  whileHover={{ opacity: 1 }}
+                >
                   {article.excerpt}
-                </p>
+                </motion.p>
 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {article.tags.map((tag) => (
-                    <span
+                  {article.tags.map((tag, tagIndex) => (
+                    <motion.span
                       key={tag}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 * tagIndex }}
+                      whileHover={{ scale: 1.1 }}
                       className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm rounded-full"
                     >
                       <Tag size={12} />
                       {tag}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
 
                 <motion.button
-                  whileHover={{ x: 5 }}
-                  className="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                  whileHover={{ x: 5, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300"
                 >
                   Read More →
                 </motion.button>
@@ -172,8 +232,9 @@ const Articles = () => {
 
         {filteredArticles.length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
             className="text-center py-16"
           >
             <p className="text-gray-600 dark:text-gray-400 text-lg">No articles found in this category.</p>
