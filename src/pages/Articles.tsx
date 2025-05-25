@@ -62,7 +62,7 @@ const Articles = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -71,10 +71,10 @@ const Articles = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Articles & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Blogs</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Sharing knowledge and insights from my development journey
           </p>
         </motion.div>
@@ -95,7 +95,7 @@ const Articles = () => {
               className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                 filter === category.id
                   ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
               }`}
             >
               {category.name}
@@ -117,7 +117,7 @@ const Articles = () => {
               exit={{ opacity: 0, y: 50 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 group"
             >
               <div className="h-48 overflow-hidden">
                 <img
@@ -128,7 +128,7 @@ const Articles = () => {
               </div>
 
               <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
                   <div className="flex items-center gap-1">
                     <Calendar size={16} />
                     <span>{new Date(article.date).toLocaleDateString()}</span>
@@ -139,11 +139,11 @@ const Articles = () => {
                   </div>
                 </div>
 
-                <h2 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {article.title}
                 </h2>
 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                   {article.excerpt}
                 </p>
 
@@ -151,7 +151,7 @@ const Articles = () => {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full"
+                      className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm rounded-full"
                     >
                       <Tag size={12} />
                       {tag}
@@ -161,7 +161,7 @@ const Articles = () => {
 
                 <motion.button
                   whileHover={{ x: 5 }}
-                  className="text-blue-600 font-medium hover:text-blue-700 transition-colors"
+                  className="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                 >
                   Read More →
                 </motion.button>
@@ -176,7 +176,7 @@ const Articles = () => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <p className="text-gray-600 text-lg">No articles found in this category.</p>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">No articles found in this category.</p>
           </motion.div>
         )}
       </div>

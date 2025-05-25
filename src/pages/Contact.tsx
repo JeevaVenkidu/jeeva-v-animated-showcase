@@ -45,7 +45,7 @@ const Contact = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       {/* Background particles effect would go here */}
       
@@ -56,10 +56,10 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Ready to collaborate or discuss opportunities? I'd love to hear from you.
           </p>
         </motion.div>
@@ -70,9 +70,9 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white rounded-xl shadow-lg p-8 border border-gray-100"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
           >
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send Me a Message</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Send Me a Message</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
@@ -81,7 +81,7 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Name
                   </label>
                   <input
@@ -91,7 +91,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="Your name"
                   />
                 </motion.div>
@@ -101,7 +101,7 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email
                   </label>
                   <input
@@ -111,7 +111,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                     placeholder="your.email@example.com"
                   />
                 </motion.div>
@@ -122,7 +122,7 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Subject
                 </label>
                 <input
@@ -132,7 +132,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   placeholder="What's this about?"
                 />
               </motion.div>
@@ -142,7 +142,7 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -152,7 +152,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   placeholder="Tell me about your project or opportunity..."
                 />
               </motion.div>
@@ -181,8 +181,8 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-8"
           >
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Contact Information</h3>
               
               <div className="space-y-4">
                 <motion.div
@@ -191,12 +191,12 @@ const Contact = () => {
                   transition={{ delay: 0.5 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">Email</p>
-                    <p className="text-gray-600">jeeva.v@example.com</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">Email</p>
+                    <p className="text-gray-600 dark:text-gray-300">jeeva.v@example.com</p>
                   </div>
                 </motion.div>
 
@@ -206,12 +206,12 @@ const Contact = () => {
                   transition={{ delay: 0.6 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <Phone className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">Phone</p>
-                    <p className="text-gray-600">+91 12345 67890</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">Phone</p>
+                    <p className="text-gray-600 dark:text-gray-300">+91 12345 67890</p>
                   </div>
                 </motion.div>
 
@@ -221,19 +221,19 @@ const Contact = () => {
                   transition={{ delay: 0.7 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <MapPin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">Location</p>
-                    <p className="text-gray-600">India</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">Location</p>
+                    <p className="text-gray-600 dark:text-gray-300">India</p>
                   </div>
                 </motion.div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">Follow Me</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-6">Follow Me</h3>
               
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
@@ -247,7 +247,7 @@ const Contact = () => {
                     transition={{ delay: 0.8 + index * 0.1 }}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition-all duration-300"
+                    className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
                   >
                     <social.icon size={20} />
                   </motion.a>
