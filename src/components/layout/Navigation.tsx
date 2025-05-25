@@ -37,7 +37,7 @@ const Navigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-background/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-background/90 backdrop-blur-md shadow-lg' : 'bg-background/70'
       } dark:border-b dark:border-gray-800`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,7 +102,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 dark:bg-gray-900/95 backdrop-blur-md border-t dark:border-gray-800"
+            className="md:hidden bg-background/95 backdrop-blur-md border-t border-border"
           >
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item, index) => (

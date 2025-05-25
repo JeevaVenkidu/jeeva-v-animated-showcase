@@ -55,7 +55,7 @@ const Projects = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -64,10 +64,10 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             My <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             A showcase of my backend expertise and growing full-stack capabilities
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ const Projects = () => {
               className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                 filter === category.id
                   ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md border border-gray-200 dark:border-gray-700'
               }`}
             >
               {category.name}
@@ -121,7 +121,7 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <p className="text-gray-600 text-lg">No projects found in this category.</p>
+            <p className="text-gray-600 dark:text-gray-300 text-lg">No projects found in this category.</p>
           </motion.div>
         )}
       </div>
