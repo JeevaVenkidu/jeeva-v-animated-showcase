@@ -1,7 +1,6 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import ParticleBackground from '../components/effects/ParticleBackground';
 
 const About = () => {
   const skills = [
@@ -54,10 +53,6 @@ const About = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      {/* Particle effects for both light and dark modes */}
-      <ParticleBackground />
-      <SimpleParticleBackground />
-      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
