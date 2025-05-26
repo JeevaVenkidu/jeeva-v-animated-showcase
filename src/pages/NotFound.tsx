@@ -2,6 +2,8 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from 'framer-motion';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import ParticleBackground from '../components/effects/ParticleBackground';
 
 const NotFound = () => {
   const location = useLocation();
@@ -15,7 +17,9 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden">
-      {/* Particle effects are now handled globally in App.tsx */}
+      {/* Particle effects for both light and dark modes */}
+      <ParticleBackground />
+      <SimpleParticleBackground />
       
       <motion.div 
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
