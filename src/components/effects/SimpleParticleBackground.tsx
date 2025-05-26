@@ -22,23 +22,23 @@ const SimpleParticleBackground = () => {
 
     // Create particles
     const particlesArray: Particle[] = [];
-    const numberOfParticles = 150;
+    const numberOfParticles = 120;
     
     // Enhanced colors for better visibility in both themes
     const lightModeColors = [
-      'rgba(59, 130, 246, 0.6)', 
-      'rgba(139, 92, 246, 0.6)', 
-      'rgba(6, 182, 212, 0.6)',
-      'rgba(16, 185, 129, 0.6)',
-      'rgba(245, 158, 11, 0.6)'
-    ];
-    
-    const darkModeColors = [
       'rgba(59, 130, 246, 0.8)', 
       'rgba(139, 92, 246, 0.8)', 
       'rgba(6, 182, 212, 0.8)',
       'rgba(16, 185, 129, 0.8)',
       'rgba(245, 158, 11, 0.8)'
+    ];
+    
+    const darkModeColors = [
+      'rgba(59, 130, 246, 0.9)', 
+      'rgba(139, 92, 246, 0.9)', 
+      'rgba(6, 182, 212, 0.9)',
+      'rgba(16, 185, 129, 0.9)',
+      'rgba(245, 158, 11, 0.9)'
     ];
 
     // Detect dark mode
@@ -78,11 +78,11 @@ const SimpleParticleBackground = () => {
         this.y = Math.random() * canvas.height;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.size = Math.random() * 8 + 2;
-        this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = Math.random() * 3 - 1.5;
+        this.size = Math.random() * 6 + 2;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
         this.density = Math.random() * 30 + 1;
-        this.baseOpacity = Math.random() * 0.5 + 0.3;
+        this.baseOpacity = Math.random() * 0.4 + 0.4;
         this.opacity = this.baseOpacity;
         this.updateColor();
       }
@@ -105,7 +105,7 @@ const SimpleParticleBackground = () => {
           const forceDirectionY = dy / distance;
           
           // Max distance for mouse interaction
-          const maxDistance = 120;
+          const maxDistance = 100;
           let force = (maxDistance - distance) / maxDistance;
           
           if (force < 0) force = 0;
@@ -116,24 +116,24 @@ const SimpleParticleBackground = () => {
           if (distance < maxDistance) {
             this.x -= directionX;
             this.y -= directionY;
-            this.opacity = Math.min(1, this.baseOpacity + force * 0.5);
+            this.opacity = Math.min(1, this.baseOpacity + force * 0.4);
           } else {
             // Return to original position
             if (this.x !== this.baseX) {
               const dx = this.x - this.baseX;
-              this.x -= dx / 20;
+              this.x -= dx / 15;
             }
             if (this.y !== this.baseY) {
               const dy = this.y - this.baseY;
-              this.y -= dy / 20;
+              this.y -= dy / 15;
             }
             this.opacity = this.baseOpacity;
           }
         }
 
         // Normal movement
-        this.x += this.speedX * 0.5;
-        this.y += this.speedY * 0.5;
+        this.x += this.speedX * 0.3;
+        this.y += this.speedY * 0.3;
 
         // Bounce off edges
         if (this.x > canvas.width || this.x < 0) {
@@ -164,13 +164,13 @@ const SimpleParticleBackground = () => {
         const dx = this.x - otherParticle.x;
         const dy = this.y - otherParticle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const maxDistance = 120;
+        const maxDistance = 100;
 
         if (distance < maxDistance) {
-          const opacity = isDarkMode() ? 0.3 : 0.2;
+          const opacity = isDarkMode() ? 0.4 : 0.3;
           const connectionOpacity = opacity * (1 - distance / maxDistance);
           ctx.strokeStyle = `rgba(59, 130, 246, ${connectionOpacity})`;
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(this.x, this.y);
           ctx.lineTo(otherParticle.x, otherParticle.y);
@@ -227,15 +227,15 @@ const SimpleParticleBackground = () => {
   return (
     <canvas 
       ref={canvasRef}
-      className="absolute inset-0 -z-10 pointer-events-none"
+      className="fixed inset-0 pointer-events-none"
       style={{ 
-        backgroundColor: 'transparent',
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: -10
+        zIndex: -1,
+        pointerEvents: 'none'
       }}
     />
   );

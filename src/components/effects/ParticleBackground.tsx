@@ -13,7 +13,16 @@ const ParticleBackground = () => {
     <Particles
       id="tsparticles"
       init={particlesInit}
-      className="absolute inset-0 -z-10 pointer-events-none"
+      className="fixed inset-0 pointer-events-none"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        pointerEvents: 'none'
+      }}
       options={{
         background: {
           color: {
@@ -45,7 +54,7 @@ const ParticleBackground = () => {
             grab: {
               distance: 140,
               links: {
-                opacity: 0.5,
+                opacity: 0.8,
                 color: {
                   value: ['#3b82f6', '#8b5cf6', '#06b6d4']
                 }
@@ -67,11 +76,11 @@ const ParticleBackground = () => {
             },
             distance: 150,
             enable: true,
-            opacity: 0.4,
-            width: 1,
+            opacity: 0.6,
+            width: 1.5,
             triangles: {
               enable: true,
-              opacity: 0.1
+              opacity: 0.15
             }
           },
           move: {
@@ -94,24 +103,24 @@ const ParticleBackground = () => {
               enable: true,
               area: 800,
             },
-            value: 100,
+            value: 80,
           },
           opacity: {
             value: {
-              min: 0.3,
-              max: 0.8
+              min: 0.4,
+              max: 0.9
             },
             animation: {
               enable: true,
               speed: 1.5,
-              minimumValue: 0.2
+              minimumValue: 0.3
             }
           },
           shape: {
             type: ['circle', 'triangle', 'polygon'],
           },
           size: {
-            value: { min: 1, max: 5 },
+            value: { min: 1, max: 4 },
             animation: {
               enable: true,
               speed: 3,
@@ -127,12 +136,6 @@ const ParticleBackground = () => {
           }
         },
         detectRetina: true,
-        style: {
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          zIndex: '-10',
-        }
       }}
     />
   );
