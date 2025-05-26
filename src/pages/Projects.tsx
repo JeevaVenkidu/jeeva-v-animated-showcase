@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/cards/ProjectCard';
@@ -168,6 +169,9 @@ const Projects = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Glass effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
     </motion.div>
   );
 };

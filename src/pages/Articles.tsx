@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag } from 'lucide-react';
@@ -91,7 +90,7 @@ const Articles = () => {
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       {/* Particle effects for both light and dark modes */}
-      <div className="absolute inset-0 -z-20">
+      <div className="absolute inset-0 -z-30">
         <ParticleBackground />
         <SimpleParticleBackground />
       </div>
@@ -246,6 +245,9 @@ const Articles = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Glass effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
     </motion.div>
   );
 };
