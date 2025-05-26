@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import FloatingIcons from '../3d/FloatingIcons';
 import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
-import ParticleBackground from '../effects/ParticleBackground';
-import SimpleParticleBackground from '../effects/SimpleParticleBackground';
 import AnimatedButton from '../ui/AnimatedButton';
 
 const Hero = ({ use3D = true }) => {
@@ -19,7 +16,7 @@ const Hero = ({ use3D = true }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16"> {/* Added pt-16 top padding */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16">
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -30,17 +27,8 @@ const Hero = ({ use3D = true }) => {
           style={{ animationDuration: '10s' }}></div>
       </div>
       
-      {use3D ? (
-        <>
-          <ParticleBackground />
-          <FloatingIcons />
-        </>
-      ) : (
-        <>
-          <SimpleParticleBackground />
-          <SimpleFloatingIcons />
-        </>
-      )}
+      {/* Only render floating icons, particle background is now global */}
+      {use3D ? <FloatingIcons /> : <SimpleFloatingIcons />}
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <motion.div
