@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag } from 'lucide-react';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Articles = () => {
   const [filter, setFilter] = useState('all');
@@ -88,6 +90,12 @@ const Articles = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
+      {/* Particle effects for both light and dark modes */}
+      <div className="absolute inset-0 -z-20">
+        <ParticleBackground />
+        <SimpleParticleBackground />
+      </div>
+      
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
