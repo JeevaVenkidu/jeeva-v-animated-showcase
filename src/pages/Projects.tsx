@@ -1,55 +1,19 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import ProjectCard from '../components/cards/ProjectCard';
+import { useProjectController } from '../controllers/useProjectController';
+import ProjectCardView from '../views/ProjectCardView';
+import CategoryFilterView from '../views/CategoryFilterView';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Projects = () => {
-  const [filter, setFilter] = useState('all');
-
-  const projects = [
-    {
-      title: 'E-Commerce API',
-      description: 'Comprehensive e-commerce backend built with Node.js, Express.js, and PostgreSQL. Features include user authentication with Keycloak, product management, order processing, and payment integration.',
-      tags: ['Node.js', 'Express.js', 'PostgreSQL', 'Keycloak', 'REST API'],
-      category: 'backend',
-      featured: true,
-      githubUrl: '#',
-    },
-    {
-      title: 'CRM System',
-      description: 'Customer Relationship Management system with token-based authentication, role-based access control, and comprehensive customer data management.',
-      tags: ['Node.js', 'JWT', 'PostgreSQL', 'Prisma'],
-      category: 'backend',
-      githubUrl: '#',
-    },
-    {
-      title: 'Auto Fertilizer Mixer',
-      description: 'PLC-based precision agriculture system for automated fertilizer mixing and distribution, improving crop yield and reducing waste.',
-      tags: ['PLC', 'IoT', 'Agriculture', 'Automation'],
-      category: 'academic',
-      githubUrl: '#',
-    },
-    {
-      title: 'Portfolio Website',
-      description: 'Interactive portfolio website built with React.js, featuring 3D animations, particle effects, and responsive design.',
-      tags: ['React.js', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
-      category: 'frontend',
-      githubUrl: '#',
-    },
-  ];
-
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'backend', name: 'Backend' },
-    { id: 'frontend', name: 'Frontend' },
-    { id: 'academic', name: 'Academic' },
-  ];
-
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
+  const {
+    projects,
+    categories,
+    selectedCategory,
+    isLoading,
+    handleCategoryChange,
+  } = useProjectController();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,6 +39,14 @@ const Projects = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 flex items-center justify-center">
+        <div className="text-xl text-gray-600 dark:text-gray-300">Loading projects...</div>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -83,8 +55,6 @@ const Projects = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      {/* Particle effects for both light and dark modes */}
-      <ParticleBackground />
       <SimpleParticleBackground />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -112,32 +82,12 @@ const Projects = () => {
           </motion.p>
         </motion.div>
 
-        {/* Filter Buttons */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {categories.map((category, index) => (
-            <motion.button
-              key={category.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setFilter(category.id)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                filter === category.id
-                  ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg'
-              }`}
-            >
-              {category.name}
-            </motion.button>
-          ))}
-        </motion.div>
+        <CategoryFilterView
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+        />
 
-        {/* Projects Grid */}
         <motion.div
           layout
           variants={containerVariants}
@@ -145,7 +95,7 @@ const Projects = () => {
           animate="visible"
           className="grid md:grid-cols-2 gap-8"
         >
-          {filteredProjects.map((project, index) => (
+          {projects.map((project) => (
             <motion.div
               key={project.title}
               layout
@@ -153,12 +103,12 @@ const Projects = () => {
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <ProjectCard {...project} />
+              <ProjectCardView project={project} featured={project.featured} />
             </motion.div>
           ))}
         </motion.div>
 
-        {filteredProjects.length === 0 && (
+        {projects.length === 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

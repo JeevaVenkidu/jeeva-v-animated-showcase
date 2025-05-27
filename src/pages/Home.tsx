@@ -1,26 +1,19 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { useHomeController } from '../controllers/useHomeController';
 import Hero from '../components/sections/Hero';
 
 const Home = () => {
-  const [use3D, setUse3D] = useState(true);
-  
-  // Check if Three.js related modules are available
-  useEffect(() => {
-    const check3DSupport = async () => {
-      try {
-        await import('@react-three/fiber');
-        await import('@react-three/drei');
-        setUse3D(true);
-      } catch (error) {
-        console.warn('3D libraries not available, falling back to 2D animations');
-        setUse3D(false);
-      }
-    };
-    
-    check3DSupport();
-  }, []);
+  const { heroData, use3D, isLoading } = useHomeController();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
+        <div className="text-xl text-gray-600 dark:text-gray-300">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
