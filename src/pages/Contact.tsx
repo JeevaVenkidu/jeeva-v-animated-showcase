@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 import AnimatedButton from '../components/ui/AnimatedButton';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -100,7 +98,6 @@ const Contact = () => {
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       <SimpleParticleBackground />
-      <ParticleBackground />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div

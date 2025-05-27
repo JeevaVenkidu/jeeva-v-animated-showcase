@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import FloatingIcons from '../3d/FloatingIcons';
 import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
 import ParticleBackground from '../effects/ParticleBackground';
@@ -19,7 +20,7 @@ const Hero = ({ use3D = true }) => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16"> {/* Added pt-16 top padding */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16">
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -60,7 +61,6 @@ const Hero = ({ use3D = true }) => {
             </span>
           </motion.h1>
 
-          {/* Fixed animation for the transition text */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,13 +107,15 @@ const Hero = ({ use3D = true }) => {
               Download Resume
             </AnimatedButton>
             
-            <AnimatedButton 
-              variant="outline" 
-              size="lg"
-              className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border-white/40 dark:border-gray-600/40 hover:bg-white/20 dark:hover:bg-gray-700/20 shadow-lg"
-            >
-              View Projects
-            </AnimatedButton>
+            <Link to="/projects">
+              <AnimatedButton 
+                variant="outline" 
+                size="lg"
+                className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border-white/40 dark:border-gray-600/40 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-500/60 hover:text-blue-700 dark:hover:text-blue-300 dark:hover:bg-gradient-to-r dark:hover:from-blue-600/20 dark:hover:to-purple-600/20 shadow-lg transition-all duration-300"
+              >
+                View Projects
+              </AnimatedButton>
+            </Link>
           </motion.div>
 
           <motion.div
