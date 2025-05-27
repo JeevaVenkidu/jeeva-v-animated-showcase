@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,8 +13,6 @@ const Navigation = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Coding', path: '/coding' },
-    { name: 'Articles', path: '/articles' },
     { name: 'Contact', path: '/contact' },
   ];
 

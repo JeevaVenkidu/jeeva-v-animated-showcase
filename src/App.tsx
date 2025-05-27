@@ -12,8 +12,6 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
-import Coding from './pages/Coding';
-import Articles from './pages/Articles';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
@@ -29,14 +27,12 @@ const App = () => {
           <BrowserRouter>
             <div className="min-h-screen flex flex-col">
               <Navigation />
-              <main className="flex-grow pt-16"> {/* Added pt-16 for padding-top */}
+              <main className="flex-grow pt-16">
                 <AnimatePresence mode="wait">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/projects" element={<Projects />} />
-                    <Route path="/coding" element={<Coding />} />
-                    <Route path="/articles" element={<Articles />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
