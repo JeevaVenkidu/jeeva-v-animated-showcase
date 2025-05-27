@@ -1,10 +1,11 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useProjectController } from '../controllers/useProjectController';
 import ProjectCardView from '../views/ProjectCardView';
 import CategoryFilterView from '../views/CategoryFilterView';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import PopupParticleEffect from '../components/effects/PopupParticleEffect';
+import { usePopupParticles } from '../hooks/usePopupParticles';
 
 const Projects = () => {
   const {
@@ -14,6 +15,8 @@ const Projects = () => {
     isLoading,
     handleCategoryChange,
   } = useProjectController();
+
+  const { showParticles, triggerParticles } = usePopupParticles(1200);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -56,6 +59,7 @@ const Projects = () => {
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       <SimpleParticleBackground />
+      <PopupParticleEffect isVisible={showParticles} duration={2500} particleCount={60} />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -85,7 +89,10 @@ const Projects = () => {
         <CategoryFilterView
           categories={categories}
           selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
+          onCategoryChange={(category) => {
+            handleCategoryChange(category);
+            triggerParticles();
+          }}
         />
 
         <motion.div
@@ -101,6 +108,7 @@ const Projects = () => {
               layout
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
+              onHoverStart={triggerParticles}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <ProjectCardView project={project} featured={project.featured} />

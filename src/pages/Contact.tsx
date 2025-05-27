@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 import AnimatedButton from '../components/ui/AnimatedButton';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import PopupParticleEffect from '../components/effects/PopupParticleEffect';
+import { usePopupParticles } from '../hooks/usePopupParticles';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,10 +15,12 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { showParticles, triggerParticles } = usePopupParticles(1000);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    triggerParticles(); // Trigger particles on form submission
     
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -24,6 +28,7 @@ const Contact = () => {
     console.log('Form submitted:', formData);
     setIsSubmitting(false);
     setFormData({ name: '', email: '', subject: '', message: '' });
+    triggerParticles(); // Trigger particles on successful submission
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -98,6 +103,7 @@ const Contact = () => {
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       <SimpleParticleBackground />
+      <PopupParticleEffect isVisible={showParticles} duration={3000} particleCount={50} />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -131,6 +137,7 @@ const Contact = () => {
             initial="hidden"
             animate="visible"
             whileHover={{ scale: 1.02 }}
+            onHoverStart={triggerParticles}
             transition={{ duration: 0.3 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
           >
@@ -242,6 +249,7 @@ const Contact = () => {
           >
             <motion.div 
               whileHover={{ scale: 1.02, y: -5 }}
+              onHoverStart={triggerParticles}
               transition={{ duration: 0.3 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
             >
@@ -318,6 +326,7 @@ const Contact = () => {
 
             <motion.div 
               whileHover={{ scale: 1.02, y: -5 }}
+              onHoverStart={triggerParticles}
               transition={{ duration: 0.3 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
             >

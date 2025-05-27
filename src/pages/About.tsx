@@ -1,9 +1,12 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import PopupParticleEffect from '../components/effects/PopupParticleEffect';
+import { usePopupParticles } from '../hooks/usePopupParticles';
 
 const About = () => {
+  const { showParticles, triggerParticles } = usePopupParticles(1500);
+
   const skills = [
     'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'REST APIs',
     'HTML', 'CSS', 'React.js', 'JavaScript', 'TypeScript'
@@ -55,6 +58,7 @@ const About = () => {
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
       <SimpleParticleBackground />
+      <PopupParticleEffect isVisible={showParticles} duration={2500} particleCount={40} />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -87,6 +91,7 @@ const About = () => {
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
+            onHoverStart={triggerParticles}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
@@ -123,6 +128,7 @@ const About = () => {
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
+            onHoverStart={triggerParticles}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
@@ -163,6 +169,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
           whileHover={{ scale: 1.02, y: -5 }}
+          onHoverStart={triggerParticles}
           className="mt-16 text-center"
         >
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500">
