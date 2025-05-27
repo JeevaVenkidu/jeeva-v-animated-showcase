@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/cards/ProjectCard';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
@@ -83,8 +81,7 @@ const Projects = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      {/* Particle effects for both light and dark modes */}
-      <ParticleBackground />
+      {/* Use only SimpleParticleBackground to avoid WebGL conflicts */}
       <SimpleParticleBackground />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
