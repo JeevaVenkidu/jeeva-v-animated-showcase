@@ -5,8 +5,6 @@ import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import FloatingIcons from '../3d/FloatingIcons';
 import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
-import ParticleBackground from '../effects/ParticleBackground';
-import SimpleParticleBackground from '../effects/SimpleParticleBackground';
 import AnimatedButton from '../ui/AnimatedButton';
 
 const Hero = ({ use3D = true }) => {
@@ -31,17 +29,7 @@ const Hero = ({ use3D = true }) => {
           style={{ animationDuration: '10s' }}></div>
       </div>
       
-      {use3D ? (
-        <>
-          <ParticleBackground />
-          <FloatingIcons />
-        </>
-      ) : (
-        <>
-          <SimpleParticleBackground />
-          <SimpleFloatingIcons />
-        </>
-      )}
+      {use3D ? <FloatingIcons /> : <SimpleFloatingIcons />}
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <motion.div
