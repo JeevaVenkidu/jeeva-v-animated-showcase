@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useHomeController } from '../controllers/useHomeController';
 import Hero from '../components/sections/Hero';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import ParticleBackground from '../components/effects/ParticleBackground';
 
 const Home = () => {
   const { heroData, use3D, isLoading } = useHomeController();
@@ -21,7 +23,11 @@ const Home = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="relative min-h-screen"
     >
+      {/* Continuous background effects */}
+      {use3D ? <ParticleBackground /> : <SimpleParticleBackground />}
+      
       <Hero use3D={use3D} />
     </motion.div>
   );
