@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
@@ -92,7 +93,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={triggerParticles}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
+            className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
               initial={{ opacity: 0, x: -20 }}
@@ -103,7 +104,7 @@ const About = () => {
               My Journey
             </motion.h2>
             <motion.div 
-              className="space-y-4 text-gray-600 dark:text-gray-300"
+              className="space-y-4 text-gray-700 dark:text-gray-300"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -129,7 +130,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
             onHoverStart={triggerParticles}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500"
+            className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
               initial={{ opacity: 0, x: 20 }}
@@ -172,7 +173,7 @@ const About = () => {
           onHoverStart={triggerParticles}
           className="mt-16 text-center"
         >
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-shadow duration-500">
+          <div className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500">
             <motion.h3 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -185,7 +186,7 @@ const About = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="text-gray-600 dark:text-gray-300"
+              className="text-gray-700 dark:text-gray-300"
             >
               Mastering React.js and modern frontend development practices to complement my backend expertise 
               and deliver complete, end-to-end solutions.
