@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useProjectController } from '../controllers/useProjectController';
@@ -46,7 +45,6 @@ const Projects = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 flex items-center justify-center">
-        <SimpleParticleBackground />
         <div className="text-xl text-gray-600 dark:text-gray-300">Loading projects...</div>
       </div>
     );
@@ -60,7 +58,6 @@ const Projects = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      {/* Continuous background effects */}
       <SimpleParticleBackground />
       <PopupParticleEffect isVisible={showParticles} duration={2500} particleCount={60} />
       
