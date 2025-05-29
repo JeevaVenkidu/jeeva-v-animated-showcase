@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag } from 'lucide-react';
@@ -89,6 +90,16 @@ const Articles = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
+      {/* Animated background gradients */}
+      <div className="absolute inset-0 -z-30">
+        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '8s' }}></div>
+        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent dark:from-purple-600/10 rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '12s' }}></div>
+        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent dark:from-cyan-600/10 rounded-full blur-3xl animate-pulse" 
+          style={{ animationDuration: '10s' }}></div>
+      </div>
+
       {/* Particle effects for both light and dark modes */}
       <div className="absolute inset-0 -z-30">
         <ParticleBackground />
