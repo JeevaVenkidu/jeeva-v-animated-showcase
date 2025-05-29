@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
@@ -102,18 +103,25 @@ const Contact = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
     >
-      {/* Enhanced Animated background gradients - more visible */}
-      <div className="absolute inset-0 -z-20">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/40 to-transparent dark:from-blue-600/30 rounded-full blur-3xl animate-pulse" 
+      {/* Enhanced Animated background gradients - positioned above particles */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/60 to-transparent dark:from-blue-600/50 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '8s' }}></div>
-        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/40 to-transparent dark:from-purple-600/30 rounded-full blur-3xl animate-pulse" 
+        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/60 to-transparent dark:from-purple-600/50 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '12s' }}></div>
-        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/40 to-transparent dark:from-cyan-600/30 rounded-full blur-3xl animate-pulse" 
+        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/60 to-transparent dark:from-cyan-600/50 rounded-full blur-3xl animate-pulse" 
           style={{ animationDuration: '10s' }}></div>
       </div>
 
-      <SimpleParticleBackground />
-      <PopupParticleEffect isVisible={showParticles} duration={3000} particleCount={50} />
+      {/* Particle Background */}
+      <div className="absolute inset-0 z-1">
+        <SimpleParticleBackground />
+      </div>
+
+      {/* Popup Particle Effect */}
+      <div className="absolute inset-0 z-2">
+        <PopupParticleEffect isVisible={showParticles} duration={3000} particleCount={50} />
+      </div>
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -376,7 +384,7 @@ const Contact = () => {
       </div>
 
       {/* Glass effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none z-5" />
     </motion.div>
   );
 };
