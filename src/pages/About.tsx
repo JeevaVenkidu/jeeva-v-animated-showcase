@@ -1,13 +1,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import PopupParticleEffect from '../components/effects/PopupParticleEffect';
-import { usePopupParticles } from '../hooks/usePopupParticles';
 
 const About = () => {
-  const { showParticles, triggerParticles } = usePopupParticles(1500);
-
   const skills = [
     'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'REST APIs',
     'HTML', 'CSS', 'React.js', 'JavaScript', 'TypeScript'
@@ -56,29 +51,9 @@ const About = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900"
     >
-      {/* Enhanced Animated background gradients - positioned above particles */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/60 to-transparent dark:from-blue-600/50 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '8s' }}></div>
-        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/60 to-transparent dark:from-purple-600/50 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '12s' }}></div>
-        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/60 to-transparent dark:from-cyan-600/50 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '10s' }}></div>
-      </div>
-
-      {/* Particle Background */}
-      <div className="absolute inset-0 z-1">
-        <SimpleParticleBackground />
-      </div>
-
-      {/* Popup Particle Effect */}
-      <div className="absolute inset-0 z-2">
-        <PopupParticleEffect isVisible={showParticles} duration={2500} particleCount={40} />
-      </div>
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,7 +84,6 @@ const About = () => {
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
-            onHoverStart={triggerParticles}
             className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
@@ -146,7 +120,6 @@ const About = () => {
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             whileHover={{ scale: 1.02 }}
-            onHoverStart={triggerParticles}
             className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
           >
             <motion.h2 
@@ -187,7 +160,6 @@ const About = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
           whileHover={{ scale: 1.02, y: -5 }}
-          onHoverStart={triggerParticles}
           className="mt-16 text-center"
         >
           <div className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500">
@@ -211,9 +183,6 @@ const About = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Glass effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none z-5" />
     </motion.div>
   );
 };
