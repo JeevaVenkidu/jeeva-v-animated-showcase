@@ -34,16 +34,27 @@ I recommend installing Node.js via [nvm](https://github.com/nvm-sh/nvm#installin
 
    ```bash
    git clone <YOUR_GIT_URL>
+   ```
    
 2.Navigate into the project directory:
 
  ```bash
 cd <YOUR_PROJECT_NAME>
+```
+
 
 3.Install dependencies:
+
+ ```bash
 npm install
+```
+
+
 
 4.Start the development server:
+
+ ```bash
 npm run dev
+ ```
 
 5.Open http://localhost:3000 in your browser to see the site live.
