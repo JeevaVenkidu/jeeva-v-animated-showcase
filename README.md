@@ -36,6 +36,8 @@ I recommend installing Node.js via [nvm](https://github.com/nvm-sh/nvm#installin
    git clone <YOUR_GIT_URL>
    
 2.Navigate into the project directory:
+
+ ```bash
 cd <YOUR_PROJECT_NAME>
 
 3.Install dependencies:
