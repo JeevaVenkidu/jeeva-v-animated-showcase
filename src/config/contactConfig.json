@@ -1,0 +1,75 @@
+
+{
+  "hero": {
+    "title": "Get In Touch",
+    "titleHighlight": "Touch",
+    "subtitle": "Let's connect and discuss how we can work together on your next project"
+  },
+  "form": {
+    "title": "Send a Message",
+    "description": "Fill out the form below and I'll get back to you as soon as possible.",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "What's this about?"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell me about your project or question..."
+      }
+    },
+    "submitButton": {
+      "default": "Send Message",
+      "loading": "Sending..."
+    }
+  },
+  "contactInfo": {
+    "title": "Contact Information",
+    "description": "Reach out through any of these channels",
+    "items": [
+      {
+        "icon": "Mail",
+        "title": "Email",
+        "value": "hello@example.com",
+        "bgColor": "bg-blue-100 dark:bg-blue-900/20",
+        "iconColor": "text-blue-600 dark:text-blue-400"
+      },
+      {
+        "icon": "Phone",
+        "title": "Phone",
+        "value": "+1 (555) 123-4567",
+        "bgColor": "bg-green-100 dark:bg-green-900/20",
+        "iconColor": "text-green-600 dark:text-green-400"
+      },
+      {
+        "icon": "MapPin",
+        "title": "Location",
+        "value": "San Francisco, CA",
+        "bgColor": "bg-purple-100 dark:bg-purple-900/20",
+        "iconColor": "text-purple-600 dark:text-purple-400"
+      }
+    ]
+  },
+  "responseTime": {
+    "title": "Response Time",
+    "description": "I typically respond to messages within 24 hours. For urgent matters, please call or mention \"urgent\" in your message subject."
+  },
+  "toastMessages": {
+    "success": {
+      "title": "Message sent successfully!",
+      "description": "Thank you for your message. I'll get back to you soon."
+    },
+    "error": {
+      "title": "Error sending message",
+      "description": "Please try again later or contact me directly."
+    }
+  }
+}

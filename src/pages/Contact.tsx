@@ -13,6 +13,7 @@ import { Label } from '../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { toast } from '../components/ui/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import contactConfig from '../config/contactConfig.json';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -22,6 +23,12 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
+
+const iconMap = {
+  Mail,
+  Phone,
+  MapPin,
+};
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,15 +51,15 @@ const Contact = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        title: contactConfig.toastMessages.success.title,
+        description: contactConfig.toastMessages.success.description,
       });
       
       reset();
     } catch (error) {
       toast({
-        title: "Error sending message",
-        description: "Please try again later or contact me directly.",
+        title: contactConfig.toastMessages.error.title,
+        description: contactConfig.toastMessages.error.description,
         variant: "destructive",
       });
     } finally {
@@ -89,10 +96,13 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
+            {contactConfig.hero.title.replace(contactConfig.hero.titleHighlight, '')}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {contactConfig.hero.titleHighlight}
+            </span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Let's connect and discuss how we can work together on your next project
+            {contactConfig.hero.subtitle}
           </p>
         </motion.div>
 
@@ -106,20 +116,20 @@ const Contact = () => {
             <Card className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 border-white/20 dark:border-gray-700/20 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Send a Message
+                  {contactConfig.form.title}
                 </CardTitle>
                 <CardDescription className="text-gray-600 dark:text-gray-300">
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  {contactConfig.form.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
+                      <Label htmlFor="name">{contactConfig.form.fields.name.label}</Label>
                       <Input
                         id="name"
-                        placeholder="Your name"
+                        placeholder={contactConfig.form.fields.name.placeholder}
                         {...register('name')}
                         className="bg-white/50 dark:bg-gray-800/50"
                       />
@@ -128,11 +138,11 @@ const Contact = () => {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{contactConfig.form.fields.email.label}</Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="your.email@example.com"
+                        placeholder={contactConfig.form.fields.email.placeholder}
                         {...register('email')}
                         className="bg-white/50 dark:bg-gray-800/50"
                       />
@@ -143,10 +153,10 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
+                    <Label htmlFor="subject">{contactConfig.form.fields.subject.label}</Label>
                     <Input
                       id="subject"
-                      placeholder="What's this about?"
+                      placeholder={contactConfig.form.fields.subject.placeholder}
                       {...register('subject')}
                       className="bg-white/50 dark:bg-gray-800/50"
                     />
@@ -156,10 +166,10 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message">{contactConfig.form.fields.message.label}</Label>
                     <Textarea
                       id="message"
-                      placeholder="Tell me about your project or question..."
+                      placeholder={contactConfig.form.fields.message.placeholder}
                       rows={5}
                       {...register('message')}
                       className="bg-white/50 dark:bg-gray-800/50"
@@ -174,7 +184,7 @@ const Contact = () => {
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? contactConfig.form.submitButton.loading : contactConfig.form.submitButton.default}
                   </Button>
                 </form>
               </CardContent>
@@ -191,55 +201,39 @@ const Contact = () => {
             <Card className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 border-white/20 dark:border-gray-700/20 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Contact Information
+                  {contactConfig.contactInfo.title}
                 </CardTitle>
                 <CardDescription className="text-gray-600 dark:text-gray-300">
-                  Reach out through any of these channels
+                  {contactConfig.contactInfo.description}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                    <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Email</h3>
-                    <p className="text-gray-600 dark:text-gray-300">hello@example.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                    <Phone className="w-6 h-6 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Phone</h3>
-                    <p className="text-gray-600 dark:text-gray-300">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                    <MapPin className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">Location</h3>
-                    <p className="text-gray-600 dark:text-gray-300">San Francisco, CA</p>
-                  </div>
-                </div>
+                {contactConfig.contactInfo.items.map((item, index) => {
+                  const IconComponent = iconMap[item.icon as keyof typeof iconMap];
+                  return (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className={`flex items-center justify-center w-12 h-12 ${item.bgColor} rounded-lg`}>
+                        <IconComponent className={`w-6 h-6 ${item.iconColor}`} />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300">{item.value}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </CardContent>
             </Card>
 
             <Card className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 border-white/20 dark:border-gray-700/20 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                  Response Time
+                  {contactConfig.responseTime.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 dark:text-gray-300">
-                  I typically respond to messages within 24 hours. For urgent matters, 
-                  please call or mention "urgent" in your message subject.
+                  {contactConfig.responseTime.description}
                 </p>
               </CardContent>
             </Card>
