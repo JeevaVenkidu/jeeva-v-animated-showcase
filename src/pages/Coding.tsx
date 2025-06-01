@@ -1,10 +1,11 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useCodingController } from '../controllers/useCodingController';
 import CodingProfileView from '../views/CodingProfileView';
 import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import SEOHead from '../components/seo/SEOHead';
+import codingConfig from '../config/codingConfig.json';
 
 const Coding = () => {
   const { profiles, stats, isLoading } = useCodingController();
@@ -12,7 +13,7 @@ const Coding = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex items-center justify-center">
-        <div className="text-xl text-gray-600 dark:text-gray-300">Loading coding profiles...</div>
+        <div className="text-xl text-gray-600 dark:text-gray-300">{codingConfig.loading.message}</div>
       </div>
     );
   }
@@ -25,6 +26,13 @@ const Coding = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
+      <SEOHead
+        title={codingConfig.seo.title}
+        description={codingConfig.seo.description}
+        keywords={codingConfig.seo.keywords}
+        url={codingConfig.seo.url}
+      />
+
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -46,10 +54,12 @@ const Coding = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            Coding <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Profiles</span>
+            {codingConfig.hero.title} <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {codingConfig.hero.titleHighlight}
+            </span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore my coding journey across different platforms and challenges
+            {codingConfig.hero.subtitle}
           </p>
         </motion.div>
 
@@ -71,22 +81,16 @@ const Coding = () => {
             className="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
           >
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6 text-center">
-              Coding Journey Highlights
+              {codingConfig.stats.title}
             </h2>
             
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">{stats.problemsSolved}+</div>
-                <p className="text-gray-600 dark:text-gray-400">Problems Solved</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">{stats.projectsBuilt}+</div>
-                <p className="text-gray-600 dark:text-gray-400">Projects Built</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-2">{stats.certifications}+</div>
-                <p className="text-gray-600 dark:text-gray-400">Certifications</p>
-              </div>
+              {codingConfig.stats.items.map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className={`text-3xl font-bold ${item.color} mb-2`}>{item.value}</div>
+                  <p className="text-gray-600 dark:text-gray-400">{item.label}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         )}

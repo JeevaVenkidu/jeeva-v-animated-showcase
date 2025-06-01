@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useHomeController } from '../controllers/useHomeController';
 import Hero from '../components/sections/Hero';
+import SEOHead from '../components/seo/SEOHead';
+import homeConfig from '../config/homeConfig.json';
 
 const Home = () => {
   const { heroData, use3D, isLoading } = useHomeController();
@@ -22,6 +24,12 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <SEOHead
+        title={homeConfig.seo.title}
+        description={homeConfig.seo.description}
+        keywords={homeConfig.seo.keywords}
+        url={homeConfig.seo.url}
+      />
       <Hero use3D={use3D} />
     </motion.div>
   );

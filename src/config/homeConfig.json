@@ -1,0 +1,20 @@
+
+{
+  "seo": {
+    "title": "Jeeva V - Backend Developer & Full-Stack Enthusiast",
+    "description": "Backend developer specializing in Node.js, Express.js, PostgreSQL, and Prisma. Building scalable solutions and transitioning to full-stack development.",
+    "keywords": "backend developer, Node.js, Express.js, PostgreSQL, Prisma, REST APIs, full-stack developer, web development",
+    "url": "https://jeevacode.web.app"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Jeeva V",
+    "title": "Backend Developer",
+    "subtitle": "Building robust and scalable backend solutions",
+    "description": "Passionate backend developer with expertise in Node.js, Express.js, and PostgreSQL. Currently expanding into full-stack development.",
+    "cta": {
+      "primary": "View My Work",
+      "secondary": "Get In Touch"
+    }
+  }
+}
