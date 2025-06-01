@@ -1,9 +1,8 @@
-
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from 'framer-motion';
-import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
 import ParticleBackground from '../components/effects/ParticleBackground';
+import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
 
 const NotFound = () => {
   const location = useLocation();
@@ -16,7 +15,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden">
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -27,7 +26,6 @@ const NotFound = () => {
           style={{ animationDuration: '10s' }}></div>
       </div>
 
-      {/* Particle effects for both light and dark modes */}
       <ParticleBackground />
       <SimpleParticleBackground />
       
@@ -65,6 +63,9 @@ const NotFound = () => {
           Return to Home
         </motion.a>
       </motion.div>
+
+      {/* Glass effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
     </div>
   );
 };

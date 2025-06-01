@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useCodingController } from '../controllers/useCodingController';
 import CodingProfileView from '../views/CodingProfileView';
+import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
 
 const Coding = () => {
@@ -10,7 +11,7 @@ const Coding = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 flex items-center justify-center">
+      <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex items-center justify-center">
         <div className="text-xl text-gray-600 dark:text-gray-300">Loading coding profiles...</div>
       </div>
     );
@@ -22,7 +23,7 @@ const Coding = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 relative overflow-hidden"
+      className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
@@ -34,6 +35,7 @@ const Coding = () => {
           style={{ animationDuration: '10s' }}></div>
       </div>
 
+      <ParticleBackground />
       <SimpleParticleBackground />
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
