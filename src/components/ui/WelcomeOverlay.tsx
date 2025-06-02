@@ -10,7 +10,7 @@ interface WelcomeOverlayProps {
 
 const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({ 
   onComplete, 
-  duration = 2500 
+  duration = 4000 
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -31,9 +31,9 @@ const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + (100 / (duration / 50));
+        return prev + (100 / (duration / 100));
       });
-    }, 50);
+    }, 100);
 
     // Auto-dismiss timer
     const timer = setTimeout(() => {
@@ -51,7 +51,7 @@ const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({
     localStorage.setItem('hasSeenWelcome', 'true');
     setTimeout(() => {
       onComplete();
-    }, 300);
+    }, 500); // Small delay for smooth transition
   };
 
   const handleSkip = () => {
@@ -65,16 +65,31 @@ const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+          transition={{ duration: 0.5 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"
         >
-          {/* Cinematic scanlines */}
-          <div className="absolute inset-0 opacity-10">
-            {[...Array(50)].map((_, i) => (
-              <div
+          {/* Background particles */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
                 key={i}
-                className="w-full h-px bg-white opacity-20"
-                style={{ marginTop: '20px' }}
+                className="absolute w-2 h-2 bg-white/20 rounded-full"
+                initial={{
+                  x: Math.random() * window.innerWidth,
+                  y: Math.random() * window.innerHeight,
+                  scale: 0,
+                }}
+                animate={{
+                  y: [null, -100],
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: "easeOut",
+                }}
               />
             ))}
           </div>
@@ -82,64 +97,62 @@ const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({
           {/* Skip button */}
           <button
             onClick={handleSkip}
-            className="absolute top-4 right-4 flex items-center gap-1 text-white/60 hover:text-white transition-colors text-xs bg-white/5 backdrop-blur-sm rounded-full px-3 py-1 hover:bg-white/10"
+            className="absolute top-6 right-6 flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 hover:bg-white/20"
             aria-label="Skip welcome message"
           >
             <span>Skip</span>
-            <X size={12} />
+            <X size={16} />
           </button>
 
-          {/* Main content with movie title style */}
-          <div className="text-center text-white max-w-4xl mx-auto px-6">
+          {/* Main content */}
+          <div className="text-center text-white max-w-2xl mx-auto px-6">
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* Main title with cinematic styling */}
-              <motion.h1 
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+                Welcome
+              </h1>
+              
+              <motion.p
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-6xl md:text-8xl font-bold mb-4 tracking-wider"
-                style={{
-                  fontFamily: 'serif',
-                  textShadow: '0 0 20px rgba(255,255,255,0.3)',
-                  background: 'linear-gradient(45deg, #ffffff, #e0e0e0, #ffffff)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-xl md:text-2xl mb-8 text-white/90"
               >
-                JEEVA
-              </motion.h1>
-              
-              {/* Subtitle */}
+                to Jeeva's Portfolio
+              </motion.p>
+
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="space-y-2"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className="space-y-4"
               >
-                <div className="h-px w-32 bg-white mx-auto mb-4"></div>
-                <p className="text-lg md:text-xl text-gray-300 tracking-widest uppercase">
-                  Portfolio
+                <p className="text-lg text-white/80">
+                  Backend Developer transitioning to Full-Stack Excellence
                 </p>
-                <p className="text-sm text-gray-400 font-light">
-                  Backend to Full-Stack Excellence
-                </p>
+                
+                <button
+                  onClick={handleSkip}
+                  className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  <span>Enter Portfolio</span>
+                  <ArrowRight size={18} />
+                </button>
               </motion.div>
             </motion.div>
 
-            {/* Minimal progress indicator */}
+            {/* Progress bar */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 1.0 }}
-              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-48 h-0.5 bg-white/10 overflow-hidden"
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: "100%", opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-1 bg-white/20 rounded-full overflow-hidden"
             >
               <motion.div
-                className="h-full bg-white"
+                className="h-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
                 initial={{ width: "0%" }}
                 animate={{ width: `${progress}%` }}
                 transition={{ ease: "linear" }}

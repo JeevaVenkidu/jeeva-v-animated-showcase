@@ -10,10 +10,10 @@ export const useWelcomeOverlay = () => {
     const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
     
     if (!hasSeenWelcome) {
-      // Shorter delay for quicker start
+      // Small delay to ensure smooth loading
       const timer = setTimeout(() => {
         setShowWelcome(true);
-      }, 100);
+      }, 300);
       
       return () => clearTimeout(timer);
     } else {
