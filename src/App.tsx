@@ -33,7 +33,7 @@ const App = () => {
           {showWelcome && (
             <WelcomeOverlay 
               onComplete={handleWelcomeComplete}
-              duration={4000}
+              duration={2500}
             />
           )}
           
