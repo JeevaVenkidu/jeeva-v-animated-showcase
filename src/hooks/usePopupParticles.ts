@@ -1,106 +1,91 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useGlobalPerformanceManager } from './useGlobalPerformanceManager';
 
 interface ParticleInstance {
   id: string;
   timestamp: number;
 }
 
-export const usePopupParticles = (triggerDelay: number = 1000) => {
-  const { canStartParticleEffect, startParticleEffect, endParticleEffect, config } = useGlobalPerformanceManager();
+export const usePopupParticles = (triggerDelay: number = 1000, maxParticles: number = 3) => {
   const [activeParticles, setActiveParticles] = useState<ParticleInstance[]>([]);
   const [showParticles, setShowParticles] = useState(false);
   const lastTriggerTime = useRef<number>(0);
-  const maxParticles = config.isMobile ? 1 : 2;
-  const cooldownPeriod = config.clickCooldown;
+  const cooldownPeriod = 500; // Minimum time between triggers (ms)
 
   useEffect(() => {
-    if (!config.isReducedMotion) {
-      const timer = setTimeout(() => {
-        triggerParticles();
-      }, triggerDelay);
+    // Auto-trigger particles after component mounts with a delay
+    const timer = setTimeout(() => {
+      triggerParticles();
+    }, triggerDelay);
 
-      return () => clearTimeout(timer);
-    }
-  }, [triggerDelay, config.isReducedMotion]);
+    return () => clearTimeout(timer);
+  }, [triggerDelay]);
 
   const cleanupExpiredParticles = useCallback(() => {
     const currentTime = Date.now();
-    setActiveParticles(prev => {
-      const filtered = prev.filter(particle => currentTime - particle.timestamp < 1500);
-      // End particle effects for expired particles
-      const expired = prev.length - filtered.length;
-      for (let i = 0; i < expired; i++) {
-        endParticleEffect();
-      }
-      return filtered;
-    });
-  }, [endParticleEffect]);
+    setActiveParticles(prev => 
+      prev.filter(particle => currentTime - particle.timestamp < 3000) // Remove particles older than 3 seconds
+    );
+  }, []);
 
   const triggerParticles = useCallback(() => {
     const currentTime = Date.now();
     
-    // Check cooldown and system capacity
-    if (currentTime - lastTriggerTime.current < cooldownPeriod || 
-        !canStartParticleEffect() || 
-        config.isReducedMotion) {
+    // Prevent rapid triggering
+    if (currentTime - lastTriggerTime.current < cooldownPeriod) {
       return;
     }
 
     lastTriggerTime.current = currentTime;
+
+    // Clean up expired particles first
     cleanupExpiredParticles();
 
     setActiveParticles(prev => {
       let updatedParticles = [...prev];
       
-      // If at max capacity, remove oldest and end its effect
+      // If we're at max capacity, remove the oldest particle
       if (updatedParticles.length >= maxParticles) {
-        updatedParticles = updatedParticles.slice(1);
-        endParticleEffect();
+        updatedParticles = updatedParticles.slice(1); // Remove the oldest
       }
       
-      // Start new particle effect
-      if (startParticleEffect()) {
-        const newParticle: ParticleInstance = {
-          id: `particle_${currentTime}_${Math.random().toString(36).substr(2, 9)}`,
-          timestamp: currentTime
-        };
-        
-        return [...updatedParticles, newParticle];
-      }
+      // Add new particle
+      const newParticle: ParticleInstance = {
+        id: `particle_${currentTime}_${Math.random().toString(36).substr(2, 9)}`,
+        timestamp: currentTime
+      };
       
-      return updatedParticles;
+      return [...updatedParticles, newParticle];
     });
 
+    // Show particles effect
     setShowParticles(true);
     
+    // Auto-hide after effect duration
     setTimeout(() => {
       setShowParticles(false);
-    }, 1500);
-  }, [maxParticles, cooldownPeriod, cleanupExpiredParticles, canStartParticleEffect, startParticleEffect, endParticleEffect, config.isReducedMotion]);
+    }, 3000);
+  }, [maxParticles, cooldownPeriod, cleanupExpiredParticles]);
 
-  // Cleanup interval
+  // Cleanup interval to remove expired particles
   useEffect(() => {
     const cleanupInterval = setInterval(cleanupExpiredParticles, 1000);
     return () => clearInterval(cleanupInterval);
   }, [cleanupExpiredParticles]);
 
-  // Cleanup on unmount
+  // Cleanup all particles when component unmounts
   useEffect(() => {
     return () => {
-      // End all active particle effects
-      activeParticles.forEach(() => endParticleEffect());
       setActiveParticles([]);
       setShowParticles(false);
     };
   }, []);
 
   return {
-    showParticles: showParticles && activeParticles.length > 0 && !config.isReducedMotion,
+    showParticles: showParticles && activeParticles.length > 0,
     triggerParticles,
     setShowParticles,
     activeParticleCount: activeParticles.length,
-    canTrigger: canStartParticleEffect() && Date.now() - lastTriggerTime.current >= cooldownPeriod,
+    canTrigger: Date.now() - lastTriggerTime.current >= cooldownPeriod,
   };
 };
