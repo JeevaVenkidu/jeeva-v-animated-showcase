@@ -17,12 +17,8 @@ const OptimizedButton: React.FC<OptimizedButtonProps> = ({
   className = "",
   disabled = false
 }) => {
-  const { handleClick, canInteract } = useInteractionLimiter({
-    clickCooldown: 300,
-    maxActiveAnimations: 2
-  });
-  
-  const { getAnimationConfig, shouldAnimate } = useOptimizedAnimations();
+  const { handleClick, canInteract } = useInteractionLimiter();
+  const { shouldAnimate, getAnimationConfig } = useOptimizedAnimations();
 
   const handleOptimizedClick = () => {
     if (!onClick || disabled) return;

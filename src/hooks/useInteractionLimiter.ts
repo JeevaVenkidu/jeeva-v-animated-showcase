@@ -1,5 +1,6 @@
 
 import { useState, useRef, useCallback } from 'react';
+import { useGlobalPerformanceManager } from './useGlobalPerformanceManager';
 
 interface InteractionLimiterConfig {
   clickCooldown?: number;
@@ -8,35 +9,24 @@ interface InteractionLimiterConfig {
 }
 
 export const useInteractionLimiter = (config: InteractionLimiterConfig = {}) => {
-  const {
-    clickCooldown = 300, // 300ms between clicks
-    maxActiveAnimations = 2, // Max 2 active animations
-    throttleDelay = 100 // 100ms throttle
-  } = config;
-
+  const { canClick, registerClick, config: globalConfig } = useGlobalPerformanceManager();
   const [isThrottled, setIsThrottled] = useState(false);
-  const [activeAnimations, setActiveAnimations] = useState(0);
-  const lastClickTime = useRef<number>(0);
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null);
 
+  const actualCooldown = config.clickCooldown || globalConfig.clickCooldown;
+  const throttleDelay = config.throttleDelay || 100;
+
   const canInteract = useCallback(() => {
-    const now = Date.now();
-    const timeSinceLastClick = now - lastClickTime.current;
-    
-    return !isThrottled && 
-           timeSinceLastClick >= clickCooldown && 
-           activeAnimations < maxActiveAnimations;
-  }, [isThrottled, clickCooldown, activeAnimations, maxActiveAnimations]);
+    return !isThrottled && canClick();
+  }, [isThrottled, canClick]);
 
   const handleClick = useCallback((callback: () => void) => {
-    if (!canInteract()) {
+    if (!canInteract() || !registerClick()) {
       return;
     }
 
-    lastClickTime.current = Date.now();
     setIsThrottled(true);
-    setActiveAnimations(prev => prev + 1);
-
+    
     // Execute the callback
     callback();
 
@@ -48,25 +38,19 @@ export const useInteractionLimiter = (config: InteractionLimiterConfig = {}) => 
     throttleTimeout.current = setTimeout(() => {
       setIsThrottled(false);
     }, throttleDelay);
-
-    // Clear animation after a longer delay
-    setTimeout(() => {
-      setActiveAnimations(prev => Math.max(0, prev - 1));
-    }, 1000);
-  }, [canInteract, throttleDelay]);
+  }, [canInteract, registerClick, throttleDelay]);
 
   const handleHover = useCallback((callback: () => void) => {
-    // Limit hover effects to prevent excessive animations
-    if (activeAnimations < maxActiveAnimations / 2) {
+    // Only allow hover effects if system isn't overloaded
+    if (canInteract()) {
       callback();
     }
-  }, [activeAnimations, maxActiveAnimations]);
+  }, [canInteract]);
 
   return {
     canInteract: canInteract(),
     handleClick,
     handleHover,
-    isThrottled,
-    activeAnimations
+    isThrottled
   };
 };
