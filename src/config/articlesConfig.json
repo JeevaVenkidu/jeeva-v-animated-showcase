@@ -1,0 +1,23 @@
+
+{
+  "seo": {
+    "title": "Articles - My Portfolio",
+    "description": "Read my latest articles on web development, programming, and technology.",
+    "keywords": "articles, blog, web development, programming, technology",
+    "url": "/articles"
+  },
+  "hero": {
+    "title": "Latest",
+    "titleHighlight": "Articles",
+    "subtitle": "Insights and thoughts on web development, programming, and technology."
+  },
+  "categories": [
+    { "id": "all", "name": "All Articles" },
+    { "id": "backend", "name": "Backend" },
+    { "id": "security", "name": "Security" },
+    { "id": "career", "name": "Career" }
+  ],
+  "emptyState": {
+    "message": "No articles found for the selected category."
+  }
+}
