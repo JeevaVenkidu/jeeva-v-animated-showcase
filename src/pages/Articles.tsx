@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag } from 'lucide-react';
 import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import SEOHead from '../components/seo/SEOHead';
-import articlesConfig from '../config/articlesConfig.json';
 
 const Articles = () => {
   const [filter, setFilter] = useState('all');
@@ -91,13 +89,6 @@ const Articles = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
-      <SEOHead
-        title={articlesConfig.seo.title}
-        description={articlesConfig.seo.description}
-        keywords={articlesConfig.seo.keywords}
-        url={articlesConfig.seo.url}
-      />
-
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -124,9 +115,7 @@ const Articles = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
-            {articlesConfig.hero.title} <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {articlesConfig.hero.titleHighlight}
-            </span>
+            Articles & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Blogs</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -134,7 +123,7 @@ const Articles = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            {articlesConfig.hero.subtitle}
+            Sharing knowledge and insights from my development journey
           </motion.p>
         </motion.div>
 
@@ -145,7 +134,7 @@ const Articles = () => {
           animate="visible"
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
-          {articlesConfig.categories.map((category, index) => (
+          {categories.map((category, index) => (
             <motion.button
               key={category.id}
               variants={itemVariants}
@@ -259,7 +248,7 @@ const Articles = () => {
             transition={{ duration: 0.5 }}
             className="text-center py-16"
           >
-            <p className="text-gray-600 dark:text-gray-400 text-lg">{articlesConfig.emptyState.message}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">No articles found in this category.</p>
           </motion.div>
         )}
       </div>

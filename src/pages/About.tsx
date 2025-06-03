@@ -2,10 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import SEOHead from '../components/seo/SEOHead';
-import aboutConfig from '../config/aboutConfig.json';
 
 const About = () => {
+  const skills = [
+    'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'REST APIs',
+    'HTML', 'CSS', 'React.js', 'JavaScript', 'TypeScript'
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,13 +54,6 @@ const About = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
-      <SEOHead
-        title={aboutConfig.seo.title}
-        description={aboutConfig.seo.description}
-        keywords={aboutConfig.seo.keywords}
-        url={aboutConfig.seo.url}
-      />
-
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -84,9 +80,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
-            {aboutConfig.hero.title} <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {aboutConfig.hero.titleHighlight}
-            </span>
+            About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Me</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +88,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            {aboutConfig.hero.subtitle}
+            Backend developer with a passion for creating robust, scalable solutions and transitioning into full-stack development.
           </motion.p>
         </motion.div>
 
@@ -112,7 +106,7 @@ const About = () => {
               transition={{ delay: 0.4 }}
               className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
             >
-              {aboutConfig.journey.title}
+              My Journey
             </motion.h2>
             <motion.div 
               className="space-y-4 text-gray-700 dark:text-gray-300"
@@ -120,21 +114,18 @@ const About = () => {
               initial="hidden"
               animate="visible"
             >
-              {aboutConfig.journey.content.map((paragraph, index) => (
-                <motion.p key={index} variants={itemVariants}>
-                  {paragraph.includes('**') ? (
-                    <>
-                      {paragraph.split('**')[0]}
-                      <strong className="text-blue-600 dark:text-blue-400">
-                        {paragraph.split('**')[1]}
-                      </strong>
-                      {paragraph.split('**')[2]}
-                    </>
-                  ) : (
-                    paragraph
-                  )}
-                </motion.p>
-              ))}
+              <motion.p variants={itemVariants}>
+                Currently working as a Backend Developer at <strong className="text-blue-600 dark:text-blue-400">Viskamnix Technology</strong>, 
+                where I specialize in building robust APIs and scalable backend solutions using Node.js, Express.js, and PostgreSQL.
+              </motion.p>
+              <motion.p variants={itemVariants}>
+                My expertise lies in creating efficient database schemas with Prisma, implementing secure authentication systems, 
+                and developing RESTful APIs that power modern applications.
+              </motion.p>
+              <motion.p variants={itemVariants}>
+                I'm actively expanding my skill set by learning frontend technologies including HTML, CSS, and React.js 
+                to become a well-rounded full-stack developer.
+              </motion.p>
             </motion.div>
           </motion.div>
 
@@ -151,7 +142,7 @@ const About = () => {
               transition={{ delay: 0.6 }}
               className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
             >
-              {aboutConfig.skills.title}
+              Technical Skills
             </motion.h2>
             <motion.div 
               className="flex flex-wrap gap-3"
@@ -159,7 +150,7 @@ const About = () => {
               initial="hidden"
               animate="visible"
             >
-              {aboutConfig.skills.items.map((skill, index) => (
+              {skills.map((skill, index) => (
                 <motion.span
                   key={skill}
                   variants={skillVariants}
@@ -192,7 +183,7 @@ const About = () => {
               transition={{ delay: 1 }}
               className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4"
             >
-              {aboutConfig.currentFocus.title}
+              Current Focus
             </motion.h3>
             <motion.p 
               initial={{ opacity: 0, y: 10 }}
@@ -200,7 +191,8 @@ const About = () => {
               transition={{ delay: 1.2 }}
               className="text-gray-700 dark:text-gray-300"
             >
-              {aboutConfig.currentFocus.description}
+              Mastering React.js and modern frontend development practices to complement my backend expertise 
+              and deliver complete, end-to-end solutions.
             </motion.p>
           </div>
         </motion.div>

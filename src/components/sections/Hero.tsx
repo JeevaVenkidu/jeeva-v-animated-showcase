@@ -3,35 +3,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useInteractionLimiter } from '../../hooks/useInteractionLimiter';
-import { useOptimizedAnimations } from '../../hooks/useOptimizedAnimations';
 import FloatingIcons from '../3d/FloatingIcons';
 import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
 import ParticleBackground from '../effects/ParticleBackground';
 import SimpleParticleBackground from '../effects/SimpleParticleBackground';
-import OptimizedButton from '../ui/OptimizedButton';
+import AnimatedButton from '../ui/AnimatedButton';
 
 const Hero = ({ use3D = true }) => {
-  const { handleClick } = useInteractionLimiter({
-    clickCooldown: 500,
-    maxActiveAnimations: 1
-  });
-  
-  const { getAnimationConfig, shouldAnimate } = useOptimizedAnimations();
-
   const downloadResume = () => {
-    handleClick(() => {
-      console.log('Downloading resume...');
-    });
+    // This would trigger a resume download
+    console.log('Downloading resume...');
   };
 
   const scrollToNext = () => {
-    handleClick(() => {
-      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-    });
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
-
-  const animationConfig = getAnimationConfig();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16">
@@ -61,7 +47,7 @@ const Hero = ({ use3D = true }) => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={animationConfig}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <motion.h1 
             className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
@@ -110,42 +96,42 @@ const Hero = ({ use3D = true }) => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ ...animationConfig, delay: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <OptimizedButton 
-              onClick={downloadResume}
-              className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 dark:from-blue-700/90 dark:to-purple-700/90 dark:hover:from-blue-600/90 dark:hover:to-purple-600/90 shadow-lg px-6 py-3 rounded-lg text-white font-medium"
+            <AnimatedButton 
+              onClick={downloadResume} 
+              size="lg"
+              className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 dark:from-blue-700/90 dark:to-purple-700/90 dark:hover:from-blue-600/90 dark:hover:to-purple-600/90 shadow-lg"
             >
               Download Resume
-            </OptimizedButton>
+            </AnimatedButton>
             
             <Link to="/projects">
-              <OptimizedButton 
-                className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border border-white/40 dark:border-gray-600/40 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-500/60 hover:text-blue-700 dark:hover:text-blue-300 shadow-lg px-6 py-3 rounded-lg font-medium transition-all duration-300"
+              <AnimatedButton 
+                variant="outline" 
+                size="lg"
+                className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border-white/40 dark:border-gray-600/40 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-500/60 hover:text-blue-700 dark:hover:text-blue-300 dark:hover:bg-gradient-to-r dark:hover:from-blue-600/20 dark:hover:to-purple-600/20 shadow-lg transition-all duration-300"
               >
                 View Projects
-              </OptimizedButton>
+              </AnimatedButton>
             </Link>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ ...animationConfig, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="mt-16"
           >
-            <OptimizedButton
+            <motion.button
               onClick={scrollToNext}
-              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              <motion.div
-                animate={shouldAnimate ? { y: [0, 10, 0] } : {}}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <ArrowDown size={32} />
-              </motion.div>
-            </OptimizedButton>
+              <ArrowDown size={32} />
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>

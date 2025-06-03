@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -12,7 +13,6 @@ import { Label } from '../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { toast } from '../components/ui/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import SEOHead from '../components/seo/SEOHead';
 import contactConfig from '../config/contactConfig.json';
 
 const contactSchema = z.object({
@@ -41,14 +41,6 @@ const Contact = () => {
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
-
-  // Add SEO config for contact page
-  const seoConfig = {
-    title: "Contact Jeeva V - Get In Touch for Backend Development",
-    description: "Contact Jeeva V for backend development projects, collaboration opportunities, or technical consultations. Expert in Node.js, Express.js, and PostgreSQL.",
-    keywords: "contact jeeva v, hire backend developer, Node.js developer contact, backend development services",
-    url: "https://jeevacode.web.app/contact"
-  };
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -83,13 +75,6 @@ const Contact = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
-      <SEOHead
-        title={seoConfig.title}
-        description={seoConfig.description}
-        keywords={seoConfig.keywords}
-        url={seoConfig.url}
-      />
-
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 

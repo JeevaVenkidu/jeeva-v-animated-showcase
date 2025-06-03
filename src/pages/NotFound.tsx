@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { motion } from 'framer-motion';
 import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
-import SEOHead from '../components/seo/SEOHead';
-import notFoundConfig from '../config/notFoundConfig.json';
 
 const NotFound = () => {
   const location = useLocation();
@@ -18,13 +16,6 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden">
-      <SEOHead
-        title={notFoundConfig.seo.title}
-        description={notFoundConfig.seo.description}
-        keywords={notFoundConfig.seo.keywords}
-        url={notFoundConfig.seo.url}
-      />
-
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -50,7 +41,7 @@ const NotFound = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-6xl font-bold mb-4 text-gray-900 dark:text-gray-100"
         >
-          {notFoundConfig.content.title}
+          404
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +49,7 @@ const NotFound = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-xl text-gray-600 dark:text-gray-300 mb-8"
         >
-          {notFoundConfig.content.message}
+          Oops! Page not found
         </motion.p>
         <motion.a 
           href="/" 
@@ -69,7 +60,7 @@ const NotFound = () => {
           whileTap={{ scale: 0.95 }}
           className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          {notFoundConfig.content.cta}
+          Return to Home
         </motion.a>
       </motion.div>
 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -28,17 +27,7 @@ const Navigation = () => {
 
   useEffect(() => {
     setIsOpen(false);
-    // Scroll to top when route changes
-    window.scrollTo(0, 0);
   }, [location]);
-
-  const handleNavClick = () => {
-    setIsOpen(false);
-    // Ensure scroll to top on navigation
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 100);
-  };
 
   return (
     <motion.nav
@@ -55,7 +44,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
-            <Link to="/" onClick={handleNavClick}>Jeeva V</Link>
+            <Link to="/">Jeeva V</Link>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -68,7 +57,6 @@ const Navigation = () => {
               >
                 <Link
                   to={item.path}
-                  onClick={handleNavClick}
                   className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                     location.pathname === item.path
                       ? 'text-blue-600 dark:text-blue-400'
@@ -123,7 +111,6 @@ const Navigation = () => {
                 >
                   <Link
                     to={item.path}
-                    onClick={handleNavClick}
                     className={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
                       location.pathname === item.path
                         ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/20'
