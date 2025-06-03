@@ -5,6 +5,8 @@ import ProjectCardView from '../views/ProjectCardView';
 import CategoryFilterView from '../views/CategoryFilterView';
 import ParticleBackground from '../components/effects/ParticleBackground';
 import SimpleParticleBackground from '../components/effects/SimpleParticleBackground';
+import SEOHead from '../components/seo/SEOHead';
+import projectsConfig from '../config/projectsConfig.json';
 
 const Projects = () => {
   const {
@@ -55,6 +57,13 @@ const Projects = () => {
       transition={{ duration: 0.7, ease: "easeInOut" }}
       className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 relative overflow-hidden"
     >
+      <SEOHead
+        title={projectsConfig.seo.title}
+        description={projectsConfig.seo.description}
+        keywords={projectsConfig.seo.keywords}
+        url={projectsConfig.seo.url}
+      />
+
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
@@ -81,7 +90,9 @@ const Projects = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6"
           >
-            My <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
+            {projectsConfig.hero.title} <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {projectsConfig.hero.titleHighlight}
+            </span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -89,7 +100,7 @@ const Projects = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
           >
-            A showcase of my backend expertise and growing full-stack capabilities
+            {projectsConfig.hero.subtitle}
           </motion.p>
         </motion.div>
 
@@ -126,7 +137,7 @@ const Projects = () => {
             transition={{ duration: 0.5 }}
             className="text-center py-16"
           >
-            <p className="text-gray-600 dark:text-gray-300 text-lg">No projects found in this category.</p>
+            <p className="text-gray-600 dark:text-gray-300 text-lg">{projectsConfig.emptyState.message}</p>
           </motion.div>
         )}
       </div>

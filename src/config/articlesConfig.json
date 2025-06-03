@@ -1,0 +1,23 @@
+
+{
+  "seo": {
+    "title": "Articles & Blogs by Jeeva V - Development Insights",
+    "description": "Read my articles and blog posts about backend development, Node.js, PostgreSQL, and my journey in full-stack development.",
+    "keywords": "jeeva v articles, backend development blog, Node.js tutorials, PostgreSQL tips, development insights, programming articles",
+    "url": "https://jeevacode.web.app/articles"
+  },
+  "hero": {
+    "title": "Articles &",
+    "titleHighlight": "Blogs",
+    "subtitle": "Sharing knowledge and insights from my development journey"
+  },
+  "categories": [
+    { "id": "all", "name": "All Articles" },
+    { "id": "backend", "name": "Backend" },
+    { "id": "security", "name": "Security" },
+    { "id": "career", "name": "Career" }
+  ],
+  "emptyState": {
+    "message": "No articles found in this category."
+  }
+}

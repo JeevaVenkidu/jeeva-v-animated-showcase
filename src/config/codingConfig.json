@@ -1,0 +1,37 @@
+
+{
+  "seo": {
+    "title": "Coding Profiles - Jeeva V's Programming Journey",
+    "description": "Explore my coding journey across different platforms and programming challenges. See my problem-solving skills and project achievements.",
+    "keywords": "jeeva v coding profiles, programming challenges, coding platforms, problem solving, programming journey",
+    "url": "https://jeevacode.web.app/coding"
+  },
+  "hero": {
+    "title": "Coding",
+    "titleHighlight": "Profiles",
+    "subtitle": "Explore my coding journey across different platforms and challenges"
+  },
+  "stats": {
+    "title": "Coding Journey Highlights",
+    "items": [
+      {
+        "value": "500+",
+        "label": "Problems Solved",
+        "color": "text-blue-600"
+      },
+      {
+        "value": "25+",
+        "label": "Projects Built",
+        "color": "text-purple-600"
+      },
+      {
+        "value": "10+",
+        "label": "Certifications",
+        "color": "text-green-600"
+      }
+    ]
+  },
+  "loading": {
+    "message": "Loading coding profiles..."
+  }
+}
