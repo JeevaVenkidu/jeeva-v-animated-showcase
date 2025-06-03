@@ -1,44 +1,29 @@
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-
-interface PerformanceMetrics {
-  activeAnimations: number;
-  activeParticles: number;
-  clicksPerSecond: number;
-  isMobile: boolean;
-  reducedMotion: boolean;
-}
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface PerformanceConfig {
-  maxAnimations: number;
-  maxParticles: number;
+  maxConcurrentAnimations: number;
+  maxParticleEffects: number;
   clickCooldown: number;
-  particleCooldown: number;
+  isMobile: boolean;
+  isReducedMotion: boolean;
 }
 
 class GlobalPerformanceManager {
   private static instance: GlobalPerformanceManager;
-  private metrics: PerformanceMetrics;
-  private config: PerformanceConfig;
-  private clickTimes: number[] = [];
-  private lastParticleTime = 0;
+  private activeAnimations = 0;
+  private activeParticleEffects = 0;
   private lastClickTime = 0;
+  private config: PerformanceConfig;
   private subscribers: Set<() => void> = new Set();
 
-  private constructor() {
-    this.metrics = {
-      activeAnimations: 0,
-      activeParticles: 0,
-      clicksPerSecond: 0,
-      isMobile: this.detectMobile(),
-      reducedMotion: this.detectReducedMotion(),
-    };
-
+  constructor() {
     this.config = {
-      maxAnimations: this.metrics.isMobile ? 2 : 3,
-      maxParticles: this.metrics.isMobile ? 15 : 25,
-      clickCooldown: this.metrics.isMobile ? 500 : 300,
-      particleCooldown: this.metrics.isMobile ? 800 : 500,
+      maxConcurrentAnimations: this.detectMobile() ? 2 : 4,
+      maxParticleEffects: this.detectMobile() ? 1 : 2,
+      clickCooldown: this.detectMobile() ? 800 : 500,
+      isMobile: this.detectMobile(),
+      isReducedMotion: this.detectReducedMotion()
     };
   }
 
@@ -50,119 +35,106 @@ class GlobalPerformanceManager {
   }
 
   private detectMobile(): boolean {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-           window.innerWidth < 768;
+    return window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
   private detectReducedMotion(): boolean {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  private notifySubscribers(): void {
+  subscribe(callback: () => void) {
+    this.subscribers.add(callback);
+    return () => this.subscribers.delete(callback);
+  }
+
+  private notify() {
     this.subscribers.forEach(callback => callback());
   }
 
-  subscribe(callback: () => void): () => void {
-    this.subscribers.add(callback);
-    return () => {
-      this.subscribers.delete(callback);
-    };
+  canStartAnimation(): boolean {
+    return !this.config.isReducedMotion && this.activeAnimations < this.config.maxConcurrentAnimations;
   }
 
-  canTriggerClick(): boolean {
+  canStartParticleEffect(): boolean {
+    return !this.config.isReducedMotion && this.activeParticleEffects < this.config.maxParticleEffects;
+  }
+
+  canClick(): boolean {
     const now = Date.now();
-    if (now - this.lastClickTime < this.config.clickCooldown) {
-      return false;
+    return now - this.lastClickTime >= this.config.clickCooldown;
+  }
+
+  startAnimation(): boolean {
+    if (this.canStartAnimation()) {
+      this.activeAnimations++;
+      this.notify();
+      return true;
     }
-
-    // Update click rate tracking
-    this.clickTimes.push(now);
-    this.clickTimes = this.clickTimes.filter(time => now - time < 1000);
-    this.metrics.clicksPerSecond = this.clickTimes.length;
-
-    this.lastClickTime = now;
-    this.notifySubscribers();
-    return true;
+    return false;
   }
 
-  canTriggerParticles(): boolean {
-    const now = Date.now();
-    if (now - this.lastParticleTime < this.config.particleCooldown) {
-      return false;
+  endAnimation() {
+    this.activeAnimations = Math.max(0, this.activeAnimations - 1);
+    this.notify();
+  }
+
+  startParticleEffect(): boolean {
+    if (this.canStartParticleEffect()) {
+      this.activeParticleEffects++;
+      this.notify();
+      return true;
     }
+    return false;
+  }
 
-    if (this.metrics.activeParticles >= this.config.maxParticles) {
-      return false;
+  endParticleEffect() {
+    this.activeParticleEffects = Math.max(0, this.activeParticleEffects - 1);
+    this.notify();
+  }
+
+  registerClick(): boolean {
+    if (this.canClick()) {
+      this.lastClickTime = Date.now();
+      return true;
     }
-
-    if (this.metrics.reducedMotion) {
-      return false;
-    }
-
-    this.lastParticleTime = now;
-    return true;
-  }
-
-  incrementParticles(): void {
-    this.metrics.activeParticles++;
-    this.notifySubscribers();
-  }
-
-  decrementParticles(): void {
-    this.metrics.activeParticles = Math.max(0, this.metrics.activeParticles - 1);
-    this.notifySubscribers();
-  }
-
-  incrementAnimations(): void {
-    this.metrics.activeAnimations++;
-    this.notifySubscribers();
-  }
-
-  decrementAnimations(): void {
-    this.metrics.activeAnimations = Math.max(0, this.metrics.activeAnimations - 1);
-    this.notifySubscribers();
-  }
-
-  getMetrics(): PerformanceMetrics {
-    return { ...this.metrics };
+    return false;
   }
 
   getConfig(): PerformanceConfig {
     return { ...this.config };
   }
 
-  shouldReduceAnimations(): boolean {
-    return this.metrics.reducedMotion || 
-           this.metrics.activeAnimations >= this.config.maxAnimations ||
-           this.metrics.clicksPerSecond > 5;
+  getStats() {
+    return {
+      activeAnimations: this.activeAnimations,
+      activeParticleEffects: this.activeParticleEffects,
+      maxAnimations: this.config.maxConcurrentAnimations,
+      maxParticleEffects: this.config.maxParticleEffects
+    };
   }
 }
 
 export const useGlobalPerformanceManager = () => {
-  const [metrics, setMetrics] = useState<PerformanceMetrics>(() => 
-    GlobalPerformanceManager.getInstance().getMetrics()
-  );
-  
-  const manager = useRef(GlobalPerformanceManager.getInstance());
-
-  const updateMetrics = useCallback(() => {
-    setMetrics(manager.current.getMetrics());
-  }, []);
+  const manager = GlobalPerformanceManager.getInstance();
+  const [, forceUpdate] = useState({});
 
   useEffect(() => {
-    const unsubscribe = manager.current.subscribe(updateMetrics);
-    return unsubscribe; // This now correctly returns void
-  }, [updateMetrics]);
+    const unsubscribe = manager.subscribe(() => {
+      forceUpdate({});
+    });
+    return unsubscribe;
+  }, [manager]);
 
   return {
-    metrics,
-    config: manager.current.getConfig(),
-    canTriggerClick: manager.current.canTriggerClick.bind(manager.current),
-    canTriggerParticles: manager.current.canTriggerParticles.bind(manager.current),
-    incrementParticles: manager.current.incrementParticles.bind(manager.current),
-    decrementParticles: manager.current.decrementParticles.bind(manager.current),
-    incrementAnimations: manager.current.incrementAnimations.bind(manager.current),
-    decrementAnimations: manager.current.decrementAnimations.bind(manager.current),
-    shouldReduceAnimations: manager.current.shouldReduceAnimations.bind(manager.current),
+    canStartAnimation: useCallback(() => manager.canStartAnimation(), [manager]),
+    canStartParticleEffect: useCallback(() => manager.canStartParticleEffect(), [manager]),
+    canClick: useCallback(() => manager.canClick(), [manager]),
+    startAnimation: useCallback(() => manager.startAnimation(), [manager]),
+    endAnimation: useCallback(() => manager.endAnimation(), [manager]),
+    startParticleEffect: useCallback(() => manager.startParticleEffect(), [manager]),
+    endParticleEffect: useCallback(() => manager.endParticleEffect(), [manager]),
+    registerClick: useCallback(() => manager.registerClick(), [manager]),
+    config: manager.getConfig(),
+    stats: manager.getStats()
   };
 };
