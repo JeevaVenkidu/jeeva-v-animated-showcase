@@ -31,6 +31,7 @@ const Hero = ({ use3D = true }) => {
           style={{ animationDuration: '10s' }}></div>
       </div>
       
+      {/* Conditional rendering for performance - either 3D OR 2D effects */}
       {use3D ? (
         <>
           <ParticleBackground />
@@ -67,14 +68,16 @@ const Hero = ({ use3D = true }) => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-8"
           >
-            <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-4">
-              Backend Developer transitioning to
-            </h2>
+            <div className="backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg mb-4">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300">
+                Backend Developer transitioning to
+              </h2>
+            </div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="inline-block"
+              className="inline-block backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
             >
               <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Full-Stack Excellence
@@ -82,22 +85,26 @@ const Hero = ({ use3D = true }) => {
             </motion.div>
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
+            className="mb-12"
           >
-            Crafting robust APIs and scalable backend solutions at{' '}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">Viskamnix Technology</span>, 
-            while mastering modern frontend technologies to become a complete full-stack developer.
-          </motion.p>
+            <div className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-6 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg max-w-3xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                Crafting robust APIs and scalable backend solutions at{' '}
+                <span className="font-semibold text-blue-600 dark:text-blue-400">Viskamnix Technology</span>, 
+                while mastering modern frontend technologies to become a complete full-stack developer.
+              </p>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <AnimatedButton 
               onClick={downloadResume} 
@@ -122,11 +129,10 @@ const Hero = ({ use3D = true }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="mt-16"
           >
             <motion.button
               onClick={scrollToNext}
-              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 p-3 rounded-full border border-white/20 dark:border-gray-700/20 shadow-lg"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
