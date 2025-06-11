@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useProjectController } from '../controllers/useProjectController';
@@ -44,7 +45,9 @@ const Projects = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 flex items-center justify-center">
-        <div className="text-xl text-gray-600 dark:text-gray-300">Loading projects...</div>
+        <div className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-6 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg">
+          <div className="text-xl text-gray-600 dark:text-gray-300">Loading projects...</div>
+        </div>
       </div>
     );
   }
@@ -98,17 +101,24 @@ const Projects = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
           >
             {projectsConfig.hero.subtitle}
           </motion.p>
         </motion.div>
 
-        <CategoryFilterView
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 p-6 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg mb-12"
+        >
+          <CategoryFilterView
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
+        </motion.div>
 
         <motion.div
           layout
@@ -124,6 +134,7 @@ const Projects = () => {
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
+              className="backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg overflow-hidden"
             >
               <ProjectCardView project={project} featured={project.featured} />
             </motion.div>
@@ -135,7 +146,7 @@ const Projects = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-center py-16"
+            className="text-center py-16 backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
           >
             <p className="text-gray-600 dark:text-gray-300 text-lg">{projectsConfig.emptyState.message}</p>
           </motion.div>
