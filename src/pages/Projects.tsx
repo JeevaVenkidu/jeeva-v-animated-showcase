@@ -83,7 +83,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <motion.h1 
             initial={{ opacity: 0, scale: 0.9 }}
@@ -99,7 +99,7 @@ const Projects = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
           >
             {projectsConfig.hero.subtitle}
           </motion.p>
@@ -109,8 +109,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          whileHover={{ scale: 1.02 }}
-          className="mb-12 backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-8 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
+          className="mb-12"
         >
           <CategoryFilterView
             categories={categories}
@@ -133,7 +132,6 @@ const Projects = () => {
               variants={itemVariants}
               whileHover={{ scale: 1.02, y: -5 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500 overflow-hidden"
             >
               <ProjectCardView project={project} featured={project.featured} />
             </motion.div>
@@ -145,16 +143,12 @@ const Projects = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.02 }}
-            className="text-center py-16 backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg hover:shadow-2xl transition-shadow duration-500"
+            className="text-center py-16"
           >
             <p className="text-gray-600 dark:text-gray-300 text-lg">{projectsConfig.emptyState.message}</p>
           </motion.div>
         )}
       </div>
-
-      {/* Glass effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-900/20 pointer-events-none" />
     </motion.div>
   );
 };
