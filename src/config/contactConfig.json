@@ -1,7 +1,13 @@
 
 {
+  "seo": {
+    "title": "Contact Jeeva V - Hire Expert Backend Developer | Node.js & Express.js Specialist",
+    "description": "Get in touch with Jeeva V for backend development projects. Specializing in Node.js, Express.js, PostgreSQL, and Prisma. Available for freelance and full-time opportunities.",
+    "keywords": "contact Jeeva V, hire backend developer, Node.js developer for hire, Express.js specialist, PostgreSQL expert, Prisma developer, backend development services, freelance developer, full-stack developer contact",
+    "url": "https://jeevacode.web.app/contact"
+  },
   "hero": {
-    "title": "Get In Touch",
+    "title": "Get In",
     "titleHighlight": "Touch",
     "subtitle": "Let's connect and discuss how we can work together on your next project"
   },
