@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "jeevacodes", // 👈 this is what tells Firebase to deploy to jeevacodes.web.app
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

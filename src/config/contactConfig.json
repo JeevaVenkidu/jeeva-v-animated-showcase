@@ -1,4 +1,3 @@
-
 {
   "hero": {
     "title": "Get In Touch",
@@ -38,21 +37,21 @@
       {
         "icon": "Mail",
         "title": "Email",
-        "value": "hello@example.com",
+        "value": "contactatjeeva@gmail.com",
         "bgColor": "bg-blue-100 dark:bg-blue-900/20",
         "iconColor": "text-blue-600 dark:text-blue-400"
       },
       {
         "icon": "Phone",
         "title": "Phone",
-        "value": "+1 (555) 123-4567",
+        "value": "+91 63838 52216",
         "bgColor": "bg-green-100 dark:bg-green-900/20",
         "iconColor": "text-green-600 dark:text-green-400"
       },
       {
         "icon": "MapPin",
         "title": "Location",
-        "value": "San Francisco, CA",
+        "value": "India",
         "bgColor": "bg-purple-100 dark:bg-purple-900/20",
         "iconColor": "text-purple-600 dark:text-purple-400"
       }

@@ -1,36 +1,45 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import FloatingIcons from '../3d/FloatingIcons';
-import SimpleFloatingIcons from '../3d/SimpleFloatingIcons';
-import ParticleBackground from '../effects/ParticleBackground';
-import SimpleParticleBackground from '../effects/SimpleParticleBackground';
-import AnimatedButton from '../ui/AnimatedButton';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
+import { Link } from "react-router-dom";
+import FloatingIcons from "../3d/FloatingIcons";
+import SimpleFloatingIcons from "../3d/SimpleFloatingIcons";
+import ParticleBackground from "../effects/ParticleBackground";
+import SimpleParticleBackground from "../effects/SimpleParticleBackground";
+import AnimatedButton from "../ui/AnimatedButton";
 
 const Hero = ({ use3D = true }) => {
   const downloadResume = () => {
-    // This would trigger a resume download
-    console.log('Downloading resume...');
+    const link = document.createElement("a");
+    link.href = "/resume.pdf";
+    link.download = "Jeeva_V_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const scrollToNext = () => {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 pt-16">
       {/* Animated background gradients */}
       <div className="absolute inset-0 -z-30">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '8s' }}></div>
-        <div className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent dark:from-purple-600/10 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '12s' }}></div>
-        <div className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent dark:from-cyan-600/10 rounded-full blur-3xl animate-pulse" 
-          style={{ animationDuration: '10s' }}></div>
+        <div
+          className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-400/20 to-transparent dark:from-blue-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "8s" }}
+        ></div>
+        <div
+          className="absolute bottom-0 -right-1/4 w-2/3 h-2/3 bg-gradient-to-tl from-purple-400/20 to-transparent dark:from-purple-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "12s" }}
+        ></div>
+        <div
+          className="absolute top-1/3 right-1/4 w-1/3 h-1/3 bg-gradient-to-bl from-cyan-400/20 to-transparent dark:from-cyan-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "10s" }}
+        ></div>
       </div>
-      
+
       {use3D ? (
         <>
           <ParticleBackground />
@@ -42,20 +51,22 @@ const Hero = ({ use3D = true }) => {
           <SimpleFloatingIcons />
         </>
       )}
-      
+
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <span className="block text-gray-900 dark:text-gray-100 mb-2">Hello, I'm</span>
+            <span className="block text-gray-900 dark:text-gray-100 mb-2">
+              Hello, I'm
+            </span>
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
               Jeeva V
             </span>
@@ -88,9 +99,16 @@ const Hero = ({ use3D = true }) => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm bg-white/20 dark:bg-gray-900/20 p-4 rounded-xl border border-white/20 dark:border-gray-700/20 shadow-lg"
           >
-            Crafting robust APIs and scalable backend solutions at{' '}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">Viskamnix Technology</span>, 
-            while mastering modern frontend technologies to become a complete full-stack developer.
+            Freelance full-stack developer crafting scalable backend APIs and
+            modern frontends, driven by a passion for{" "}
+            <span className="font-semibold text-blue-600 dark:text-blue-400">
+              Linux
+            </span>
+            ,{" "}
+            <span className="font-semibold text-blue-600 dark:text-blue-400">
+              open source
+            </span>
+            , and cutting-edge technology.
           </motion.p>
 
           <motion.div
@@ -99,17 +117,17 @@ const Hero = ({ use3D = true }) => {
             transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <AnimatedButton 
-              onClick={downloadResume} 
+            <AnimatedButton
+              onClick={downloadResume}
               size="lg"
               className="backdrop-blur-sm bg-gradient-to-r from-blue-600/90 to-purple-600/90 hover:from-blue-700/90 hover:to-purple-700/90 dark:from-blue-700/90 dark:to-purple-700/90 dark:hover:from-blue-600/90 dark:hover:to-purple-600/90 shadow-lg"
             >
               Download Resume
             </AnimatedButton>
-            
+
             <Link to="/projects">
-              <AnimatedButton 
-                variant="outline" 
+              <AnimatedButton
+                variant="outline"
                 size="lg"
                 className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/10 border-white/40 dark:border-gray-600/40 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-500/60 hover:text-blue-700 dark:hover:text-blue-300 dark:hover:bg-gradient-to-r dark:hover:from-blue-600/20 dark:hover:to-purple-600/20 shadow-lg transition-all duration-300"
               >

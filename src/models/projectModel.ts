@@ -1,9 +1,8 @@
-
 export interface Project {
   title: string;
   description: string;
   tags: string[];
-  category: 'backend' | 'frontend' | 'academic';
+  category: "backend" | "frontend" | "academic";
   featured?: boolean;
   githubUrl?: string;
   liveUrl?: string;
@@ -18,41 +17,55 @@ export interface ProjectCategory {
 export class ProjectModel {
   private static projects: Project[] = [
     {
-      title: 'E-Commerce API',
-      description: 'Comprehensive e-commerce backend built with Node.js, Express.js, and PostgreSQL. Features include user authentication with Keycloak, product management, order processing, and payment integration.',
-      tags: ['Node.js', 'Express.js', 'PostgreSQL', 'Keycloak', 'REST API'],
-      category: 'backend',
+      title: "E-Commerce API",
+      description:
+        "Comprehensive e-commerce backend built with Node.js, Express.js, and PostgreSQL. Features include user authentication with Keycloak, product management, order processing, and payment integration.",
+      tags: ["Node.js", "Express.js", "PostgreSQL", "Keycloak", "REST API"],
+      category: "backend",
       featured: true,
-      githubUrl: '#',
+      // githubUrl: '#',
     },
     {
-      title: 'CRM System',
-      description: 'Customer Relationship Management system with token-based authentication, role-based access control, and comprehensive customer data management.',
-      tags: ['Node.js', 'JWT', 'PostgreSQL', 'Prisma'],
-      category: 'backend',
-      githubUrl: '#',
+      title: "CRM System",
+      description:
+        "Customer Relationship Management system with token-based authentication, role-based access control, and comprehensive customer data management.",
+      tags: ["Node.js", "JWT", "PostgreSQL", "Prisma"],
+      category: "backend",
+      // githubUrl: '#',
     },
     {
-      title: 'Auto Fertilizer Mixer',
-      description: 'PLC-based precision agriculture system for automated fertilizer mixing and distribution, improving crop yield and reducing waste.',
-      tags: ['PLC', 'IoT', 'Agriculture', 'Automation'],
-      category: 'academic',
-      githubUrl: '#',
+      title: "Real Estate Photo Lab",
+      description:
+        "Real Estate Photo Lab is a responsive, service-focused landing page for a real estate photo editing business. Built with React.js, TypeScript, Tailwind CSS, and Node.js, it features interactive service listings, pricing tables, a portfolio gallery, and a contact form with file upload support — all optimized for conversion and performance.",
+      tags: ["Node.js", "Express.js", "PostgreSQL", "Keycloak", "REST API"],
+      category: "frontend",
+      featured: true,
+      // githubUrl: '#',
     },
     {
-      title: 'Portfolio Website',
-      description: 'Interactive portfolio website built with React.js, featuring 3D animations, particle effects, and responsive design.',
-      tags: ['React.js', 'Three.js', 'Framer Motion', 'Tailwind CSS'],
-      category: 'frontend',
-      githubUrl: '#',
+      title: "Portfolio Website",
+      description:
+        "Interactive portfolio website built with React.js, featuring 3D animations, particle effects, and responsive design.",
+      tags: ["React.js", "Three.js", "Framer Motion", "Tailwind CSS"],
+      category: "frontend",
+      githubUrl:
+        "https://github.com/JeevaVenkidu/jeeva-v-animated-showcase.git",
+    },
+    {
+      title: "Auto Fertilizer Mixer",
+      description:
+        "PLC-based precision agriculture system for automated fertilizer mixing and distribution, improving crop yield and reducing waste.",
+      tags: ["PLC", "IoT", "Agriculture", "Automation"],
+      category: "academic",
+      // githubUrl: '#',
     },
   ];
 
   private static categories: ProjectCategory[] = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'backend', name: 'Backend' },
-    { id: 'frontend', name: 'Frontend' },
-    { id: 'academic', name: 'Academic' },
+    { id: "all", name: "All Projects" },
+    { id: "backend", name: "Backend" },
+    { id: "frontend", name: "Frontend" },
+    { id: "academic", name: "Academic" },
   ];
 
   static async getAllProjects(): Promise<Project[]> {
@@ -64,8 +77,8 @@ export class ProjectModel {
 
   static async getProjectsByCategory(category: string): Promise<Project[]> {
     const projects = await this.getAllProjects();
-    if (category === 'all') return projects;
-    return projects.filter(project => project.category === category);
+    if (category === "all") return projects;
+    return projects.filter((project) => project.category === category);
   }
 
   static async getCategories(): Promise<ProjectCategory[]> {
@@ -76,6 +89,6 @@ export class ProjectModel {
 
   static async getFeaturedProjects(): Promise<Project[]> {
     const projects = await this.getAllProjects();
-    return projects.filter(project => project.featured);
+    return projects.filter((project) => project.featured);
   }
 }

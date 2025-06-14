@@ -14,6 +14,7 @@ import { toast } from '../components/ui/use-toast';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import SEOHead from '../components/seo/SEOHead';
 import contactConfig from '../config/contactConfig.json';
+import emailjs from '@emailjs/browser';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -32,7 +33,7 @@ const iconMap = {
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -42,29 +43,42 @@ const Contact = () => {
     resolver: zodResolver(contactSchema),
   });
 
-  // Add SEO config for contact page
+  // SEO config for contact page
   const seoConfig = {
     title: "Contact Jeeva V - Get In Touch for Backend Development",
     description: "Contact Jeeva V for backend development projects, collaboration opportunities, or technical consultations. Expert in Node.js, Express.js, and PostgreSQL.",
     keywords: "contact jeeva v, hire backend developer, Node.js developer contact, backend development services",
-    url: "https://jeevacode.web.app/contact"
+    url: "https://jeevacodes.web.app/contact"
   };
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    console.log('Contact form submitted:', data);
-    
-    // Simulate form submission
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          subject: data.subject,
+          message: `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}\nMessage: ${data.message}`,
+        },
+        publicKey
+      );
+
       toast({
         title: contactConfig.toastMessages.success.title,
         description: contactConfig.toastMessages.success.description,
       });
-      
+
       reset();
     } catch (error) {
+      console.error("Email sending error:", error);
       toast({
         title: contactConfig.toastMessages.error.title,
         description: contactConfig.toastMessages.error.description,
