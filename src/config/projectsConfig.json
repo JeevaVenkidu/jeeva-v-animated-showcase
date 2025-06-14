@@ -1,9 +1,9 @@
 
 {
   "seo": {
-    "title": "Jeeva V Projects Portfolio - Backend & Full-Stack Development Showcase",
-    "description": "Explore Jeeva V's professional backend development projects and growing full-stack capabilities. Built with Node.js, Express.js, PostgreSQL, React.js and modern web technologies.",
-    "keywords": "Jeeva V projects, backend development portfolio, Node.js projects, Express.js applications, PostgreSQL database projects, Prisma ORM projects, REST API portfolio, full-stack projects, React.js applications, web development showcase, scalable applications",
+    "title": "Projects by Jeeva V - Backend & Full-Stack Portfolio",
+    "description": "Explore my backend development projects and growing full-stack capabilities. Built with Node.js, Express.js, PostgreSQL, and modern web technologies.",
+    "keywords": "jeeva v projects, backend projects, Node.js projects, Express.js portfolio, PostgreSQL applications, full-stack projects",
     "url": "https://jeevacode.web.app/projects"
   },
   "hero": {
