@@ -21,7 +21,7 @@ Built using modern web technologies and enhanced with help from AI tools like **
 
 ## Live Demo
 
-🚀 [**View Live Demo Here**](YOUR_LIVE_DEMO_URL_HERE)
+🚀 [**View Live Demo Here**](https://jeevacodes.web.app/)
 
 *(Consider adding a screenshot or a GIF of the website here for a quick visual preview, if hosted externally and linked.)*
 
@@ -119,9 +119,9 @@ This is a personal project, but I welcome any feedback! Please feel free to open
 
 You can reach me through:
 
-* **Email**: your-email@example.com
-* **LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
-* **GitHub**: [github.com/yourusername](https://github.com/yourusername)
+* **Email**: contactatjeeva@gmail.com
+* **LinkedIn**: [linkedin.com/in/jeeva-](https://www.linkedin.com/in/jeeva-)
+* **GitHub**: [github.com/JeevaVenkidu](https://github.com/JeevaVenkidu)
 
 Alternatively, feel free to use the contact form directly on the website.
 
